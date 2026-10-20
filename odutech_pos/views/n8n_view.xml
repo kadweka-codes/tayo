@@ -1,0 +1,143 @@
+<odoo>
+    <!-- Tree/List View -->
+    <record id="view_odutech_n8n_tree" model="ir.ui.view">
+        <field name="name">odutech.n8n.tree</field>
+        <field name="model">odutech.n8n</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="datetime"/>
+                <field name="existing_partner_id"/>
+                <field name="phone_number"/>
+                <field name="amount"/>
+                <field name="pos_order"/>
+                <field name="match_note"/>
+                <field name="processing_status" decoration-success="processing_status == 'done'" decoration-warning="processing_status == 'queue'" decoration-danger="processing_status == 'failed'" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_odutech_n8n_form" model="ir.ui.view">
+        <field name="name">odutech.n8n.form</field>
+        <field name="model">odutech.n8n</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_rematch" type="object" string="Match POS Order"
+                            invisible="pos_order"/>
+                    <button name="action_process_order_lines" type="object" string="Build Lines"
+                            invisible="processing_status == 'done'"/>
+                    <field name="processing_status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="existing_partner_id"/>
+                        <field name="phone_number"/>
+                        <field name="amount"/>
+                        <field name="debit"/>
+                        <field name="credit"/>
+                        <field name="balance"/>
+                        <field name="transaction_date"/>
+                        <field name="datetime"/>
+                        <field name="transaction_id"/>
+                        <field name="pos_order" readonly="processing_status == 'done'"/>
+                        <field name="match_note"/>
+                    </group>
+                    <field name="related_line_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_odutech_n8n" model="ir.actions.act_window">
+        <field name="name">N8N Transactions</field>
+        <field name="res_model">odutech.n8n</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No transactions yet. You can create one.
+            </p>
+        </field>
+    </record>
+    <!-- Menu Item -->
+    <menuitem id="menu_odutech_n8n" name="N8N Transactions" parent="point_of_sale.menu_point_rep" action="action_odutech_n8n" sequence="1"/>
+
+    <!-- Tree/List View -->
+    <record id="view_odutech_n8n_lines_tree" model="ir.ui.view">
+        <field name="name">odutech.n8n.lines.tree</field>
+        <field name="model">odutech.n8n.lines</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="pos_order_customer"/>
+                <field name="pos_order_cashier"/>
+                <field name="pos_order_product"/>
+                <field name="pos_order_quantity"/>
+                <field name="pos_order_amount"/>
+                <field name="phone_number"/>
+            </list>
+        </field>
+    </record>
+    <!-- Form View -->
+    <record id="view_odutech_n8n_lines_form" model="ir.ui.view">
+        <field name="name">odutech.n8n.lines.form</field>
+        <field name="model">odutech.n8n.lines</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="pos_order_customer" readonly="1"/>
+                        <field name="pos_order_cashier" readonly="1"/>
+                        <field name="pos_order_product" readonly="1"/>
+                        <field name="pos_order_quantity" readonly="1"/>
+                        <field name="pos_order_amount" readonly="1"/>
+                        <field name="phone_number" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_odutech_n8n_lines" model="ir.actions.act_window">
+        <field name="name">N8N Lines Transactions</field>
+        <field name="res_model">odutech.n8n.lines</field>
+        <field name="view_mode">list,graph,pivot,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No transactions yet. You can create one.
+            </p>
+        </field>
+    </record>
+
+    <record id="odutech_n8n_lines_view_pivot" model="ir.ui.view">
+    <field name="name">odutech.n8n.lines.pivot</field>
+    <field name="model">odutech.n8n.lines</field>
+    <field name="arch" type="xml">
+        <pivot string="N8N Lines Analysis">
+            <field name="pos_order_customer" type="row"/>
+            <field name="pos_order_product" type="row"/>
+            <field name="pos_order_cashier" type="row"/>
+            <field name="phone_number" type="row"/>
+            <field name="pos_order_quantity" type="measure"/>
+            <field name="pos_order_amount" type="measure"/>
+        </pivot>
+    </field>
+</record>
+
+    <record id="odutech_n8n_lines_view_graph" model="ir.ui.view">
+    <field name="name">odutech.n8n.lines.graph</field>
+    <field name="model">odutech.n8n.lines</field>
+    <field name="arch" type="xml">
+        <graph string="N8N Lines Graph" type="bar">
+            <field name="pos_order_customer"/>
+            <field name="pos_order_cashier"/>
+
+            <field name="pos_order_amount" type="measure"/>
+        </graph>
+    </field>
+</record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_odutech_n8n_lines" name="N8N Lines Transactions" parent="point_of_sale.menu_point_rep" action="action_odutech_n8n_lines" sequence="1"/>
+
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="access_kcb_buni_config" model="ir.model.access">
+        <field name="name">kcb.buni.config</field>
+        <field name="model_id" ref="model_kcb_buni_config"/>
+        <field name="group_id" ref="base.group_system"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+    <record id="access_kcb_buni_invoice" model="ir.model.access">
+        <field name="name">kcb.buni.invoice</field>
+        <field name="model_id" ref="model_kcb_buni_invoice"/>
+        <field name="group_id" ref="base.group_system"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+    <record id="access_kcb_buni_link_wizard" model="ir.model.access">
+        <field name="name">kcb.buni.link.wizard</field>
+        <field name="model_id" ref="model_kcb_buni_link_wizard"/>
+        <field name="group_id" ref="base.group_system"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>

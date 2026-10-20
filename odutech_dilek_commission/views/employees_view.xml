@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Pos order Form view inheriting and xpath a field   -->
+    <record id="hr_updated_employees_inherit_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='work_email']" position="after">
+                <field name="performance_pool_id" options="{'no_create':True,'no_open':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+ <record id="hr_res_company_inherit_view_form" model="ir.ui.view">
+        <field name="name">res.company.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="commission_id" options="{'no_create':True,'no_open':True}"/>
+            </xpath>
+        </field>
+    </record>
+ <record id="hr_employees_inherit_view_form" model="ir.ui.view">
+        <field name="name">hr.department.inherit</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="commission_id" options="{'no_create':True,'no_open':True}"/>
+                <field name="department_choice" />
+<!--                <field name="last_month_sales"/>-->
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_account_inherit_views" model="ir.ui.view">
+        <field name="name">account.account.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="account_category" required="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="payslip_inherit_extend_view" model="ir.ui.view">
+        <field name="name">hr.employee.allowance.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//div[@name='wage']" position="after">
+                <field name="travel_allowance"/>
+                <field name="holiday_allowance"/>
+                <field name="medical_allowance"/>
+                <field name="meal_allowance"/>
+                <field name="house_allowance"/>
+              </xpath>
+        </field>
+    </record>
+</odoo>

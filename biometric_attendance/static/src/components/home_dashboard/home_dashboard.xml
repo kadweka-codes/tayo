@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.OwlHomeFinanceDashboard" owl="1">
+        <div class="vh-100 bg-muted o_budget_dashboard_main position-relative">
+            <div style="height: 100%; overflow-y: auto;">
+                <div class="row m-1">
+                    <div class="col m-0 p-0">
+                        <div class="shadow-sm border m-1 p-2 bg-white overflow-auto">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <input type="date" id="selectedStartDate" class="form-control"
+                                           t-model="state.selectedStartDate" t-on-change="onChangeStartDate"
+                                           t-att-disabled="state.isLoading"/>
+                                </div>
+                                <div>
+                                    <input type="date" id="selectedEndDate" class="form-control"
+                                           t-model="state.selectedEndDate" t-on-change="onChangeEndDate"
+                                           t-att-disabled="state.isLoading"/>
+                                </div>
+<!--                                <div>-->
+<!--                                    <select class="form-select" t-model="state.selectedEmployee"-->
+<!--                                            t-on-change="onChangeEmployee" t-att-disabled="state.isLoading">-->
+<!--                                        <option value="all">Employees</option>-->
+<!--                                        <t t-foreach="state.employees" t-as="employee" t-key="employee.id">-->
+<!--                                            <option t-att-value="employee.id">-->
+<!--                                                <t t-esc="employee.name"/>-->
+<!--                                            </option>-->
+<!--                                        </t>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <select class="form-select" t-model="state.selectedWorkingSchedule"-->
+<!--                                            t-on-change="onChangeSelectedWorkingSchedule" t-att-disabled="state.isLoading">-->
+<!--                                        <option value="all">Working Schedule</option>-->
+<!--                                        <t t-foreach="state.workingSchedule" t-as="working" t-key="working.id">-->
+<!--                                            <option t-att-value="working.id">-->
+<!--                                                <t t-esc="working.name"/>-->
+<!--                                            </option>-->
+<!--                                        </t>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div t-if="state.isLoading" class="text-center p-5">
+                    <div class="spinner-border text-primary" role="status"/>
+                    <span class="ms-2">Loading data...</span>
+                </div>
+
+                <div t-else="" class="container-fluid">
+                    <div class="row mb-4">
+                        <div class="col-md-6 table-responsive">
+                            <h3 class="mt-2"><span>STAFF DISCIPLINARY WARNINGS</span></h3>
+                            <table class="table table-bordered text-center table-sm">
+                                <thead>
+                                    <tr class="text-white" style="background-color:#00205F;">
+                                        <th>CABBIRKA</th>
+                                        <th>ODOROSKA (Budget)</th>
+                                        <th>DHABTA (Actual)</th>
+                                        <th>FARQIGA (Difference)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="state.employeeWarnings" t-as="row" t-key="row.CABBIRKA">
+                                        <tr>
+                                            <td class="text-start" style="font-weight: 500;">
+                                                <span t-esc="row.CABBIRKA"/>
+                                            </td>
+                                            <td><span t-esc="row.ODOROSKA"/></td>
+                                            <td><span t-esc="row.DHABTA"/></td>
+                                            <td t-att-class="row.FARQIGA.includes('(') ? 'text-danger' : ''">
+                                                <span t-esc="row.FARQIGA"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-6 table-responsive">
+                            <h3 class="mt-2"><span>STAFF DATA</span></h3>
+                            <table class="table table-bordered text-center table-sm">
+                                <thead>
+                                    <tr class="text-white" style="background-color:#00205F;">
+                                        <th>CABBIRKA</th>
+                                        <th>ODOROSKA (Budget)</th>
+                                        <th>DHABTA (Actual)</th>
+                                        <th>FARQIGA (Difference)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="state.employeeStatsData" t-as="row" t-key="row.CABBIRKA">
+                                        <tr>
+                                            <td class="text-start" style="font-weight: 500;">
+                                                <span t-esc="row.CABBIRKA"/>
+                                            </td>
+                                            <td><span t-esc="row.ODOROSKA"/></td>
+                                            <td><span t-esc="row.DHABTA"/></td>
+                                            <td t-att-class="row.FARQIGA.includes('(') ? 'text-danger' : ''">
+                                                <span t-esc="row.FARQIGA"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 table-responsive">
+                            <table class="table table-bordered text-center table-sm">
+                                <thead>
+                                    <tr class="text-white" style="background-color:#00205F;">
+                                        <th>CABBIRKA</th>
+                                        <th>ODOROSKA (Budget)</th>
+                                        <th>DHABTA (Actual)</th>
+                                        <th>FARQIGA (Difference)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="state.tableDataItems" t-as="row" t-key="row.CABBIRKA">
+                                        <tr>
+                                            <td class="text-start" style="font-weight: 500;">
+                                                <span t-esc="row.CABBIRKA"/>
+                                            </td>
+                                            <td><span t-esc="row.ODOROSKA"/></td>
+                                            <td><span t-esc="row.DHABTA"/></td>
+                                            <td t-att-class="row.FARQIGA.includes('(') ? 'text-danger' : ''">
+                                                <span t-esc="row.FARQIGA"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+<!--                        <div class="col-md-6 table-responsive">-->
+<!--                            <table class="table table-bordered text-center table-sm">-->
+<!--                                <thead>-->
+<!--                                    <tr class="text-white" style="background-color:#00205F;">-->
+<!--                                        <th>CABBIRKA</th>-->
+<!--                                        <th>ODOROSKA (Budget)</th>-->
+<!--                                        <th>DHABTA (Actual)</th>-->
+<!--                                        <th>FARQIGA (Difference)</th>-->
+<!--                                    </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                    <t t-foreach="state.employeeStatsData" t-as="row" t-key="row.CABBIRKA">-->
+<!--                                        <tr>-->
+<!--                                            <td class="text-start" style="font-weight: 500;">-->
+<!--                                                <span t-esc="row.CABBIRKA"/>-->
+<!--                                            </td>-->
+<!--                                            <td><span t-esc="row.ODOROSKA"/></td>-->
+<!--                                            <td><span t-esc="row.DHABTA"/></td>-->
+<!--                                            <td t-att-class="row.FARQIGA.includes('(') ? 'text-danger' : ''">-->
+<!--                                                <span t-esc="row.FARQIGA"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </t>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+                    </div>
+
+                    <div t-if="!state.tableDataItems.length and !state.employeeStatsData.length" class="text-center p-5">
+                        <p class="text-muted">No data to display yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
+

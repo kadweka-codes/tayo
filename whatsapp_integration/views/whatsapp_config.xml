@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="whatsapp_integration_configuration_action" model="ir.actions.act_window">
+        <field name="name">WhatsApp Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">whatsapp.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="whatsapp_message_action" model="ir.actions.act_window">
+        <field name="name">WhatsApp Messages</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">whatsapp.message</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="whatsaap_integration_configuration_view_form" model="ir.ui.view">
+        <field name="name">custom.whatsapp.config.view.form</field>
+        <field name="model">whatsapp.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_test_authentication" type="object" string="Test Authentication" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_test_messaging" type="object" string="Test Messaging" class="btn-primary" invisible="state != 'connected'"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" invisible="state != 'error'"/>
+                    <button name="action_generate_verification_token" type="object" string="Generate Verification Token" confirm="Generate a new verification token? The current token stops working immediately. The new token does not expire."/>
+                    <button name="action_go_to_production" type="object" string="Go to Production" invisible="type != 'sandbox'" confirm="Switch this configuration to production? Authentication must be tested again with the live URL and token."/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,connected,error" readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-info" role="alert" invisible="type != 'sandbox'">
+                        Sandbox uses the test number and token. Go to production when the live number is ready.
+                    </div>
+                    <group>
+                        <group string="Connection">
+                            <field name="type"/>
+                            <field name="active"/>
+                            <field name="base_url"/>
+                            <field name="token" password="True"/>
+                            <field name="language_code"/>
+                        </group>
+                        <group string="Webhook and test">
+                            <field name="webhook_token" widget="CopyClipboardChar"/>
+                            <field name="webhook_url" widget="CopyClipboardChar"/>
+                            <field name="test_phone"/>
+                            <field name="test_message" placeholder="Message sent by Test Messaging"/>
+                            <field name="state_message"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Logs" name="logs">
+                            <field name="log_ids" readonly="1">
+                                <list>
+                                    <field name="create_date"/>
+                                    <field name="is_test"/>
+                                    <field name="phone"/>
+                                    <field name="body"/>
+                                    <field name="template_name"/>
+                                    <field name="wa_message_id" optional="hide"/>
+                                    <field name="state" widget="badge" decoration-warning="state == 'waiting'" decoration-success="state == 'sent'" decoration-info="state == 'received'" decoration-danger="state == 'failed'"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="whatsaap_integration_configuration_view_tree" model="ir.ui.view">
+        <field name="name">custom.whatsapp.config.view.tree</field>
+        <field name="model">whatsapp.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="base_url"/>
+                <field name="type"/>
+                <field name="state" widget="badge" decoration-success="state == 'connected'" decoration-danger="state == 'error'" decoration-muted="state == 'draft'"/>
+                <field name="language_code"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="whatsapp_message_view_tree" model="ir.ui.view">
+        <field name="name">whatsapp.message.tree</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="create_date"/>
+                <field name="is_test"/>
+                <field name="phone"/>
+                <field name="body"/>
+                <field name="template_name"/>
+                <field name="wa_message_id" optional="hide"/>
+                <field name="state" widget="badge" decoration-warning="state == 'waiting'" decoration-success="state == 'sent'" decoration-info="state == 'received'" decoration-danger="state == 'failed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="whatsapp_message_view_form" model="ir.ui.view">
+        <field name="name">whatsapp.message.form</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="config_id"/>
+                        <field name="create_date"/>
+                        <field name="is_test"/>
+                        <field name="phone"/>
+                        <field name="template_name"/>
+                        <field name="wa_message_id"/>
+                        <field name="state"/>
+                        <field name="body"/>
+                        <field name="response"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+</odoo>

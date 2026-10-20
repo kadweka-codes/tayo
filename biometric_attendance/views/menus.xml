@@ -1,0 +1,21 @@
+<odoo>
+    <menuitem
+           id="zkteko_integration" name="Biometric Devices" parent="hr_attendance.menu_hr_attendance_root"
+    />
+
+
+    <menuitem
+        id="zkteko_integration_api_setup"
+        name="API Management"
+        parent="zkteko_integration"
+        action="action_attendance_setup"
+        sequence="2"
+    />
+     <menuitem
+        id="attendance_biometric_logs_view"
+        name="Attendance Logs"
+        parent="zkteko_integration"
+        action="action_biometric_log_view"
+        sequence="2"
+    />
+</odoo>

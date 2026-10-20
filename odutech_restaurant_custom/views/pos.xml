@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="pos_restaurant.view_restaurant_table_form" model="ir.ui.view">
+            <field name="name">Restaurant Table</field>
+            <field name="model">restaurant.table</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <field name="opportunity_id"/>
+            </xpath>
+            </field>
+        </record>
+</odoo>

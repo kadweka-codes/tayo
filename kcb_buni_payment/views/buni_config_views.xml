@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_kcb_buni_config_tree" model="ir.ui.view">
+        <field name="name">kcb.buni.config.tree</field>
+        <field name="model">kcb.buni.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="provider"/>
+                <field name="manual_destination" string="Destination"/>
+                <field name="till_number"/>
+                <field name="paybill_number" string="Paybill"/>
+                <field name="person_name" string="Name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_kcb_buni_config_form" model="ir.ui.view">
+        <field name="name">kcb.buni.config.form</field>
+        <field name="model">kcb.buni.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_generate_test_link" type="object" string="Generate Test Payment Link" class="btn-primary"/>
+                    <button name="action_test_token" type="object" string="Test Authentication Token" invisible="provider == 'manual'"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="provider"/>
+                        <field name="active"/>
+                        <field name="environment" invisible="provider == 'manual'"/>
+                    </group>
+                    <notebook>
+                        <page string="Manual" invisible="provider != 'manual'">
+                            <group>
+                                <field name="manual_destination"/>
+                                <field name="till_number" invisible="manual_destination != 'till'"/>
+                                <field name="paybill_number" invisible="manual_destination != 'paybill'"/>
+                                <field name="account_number" invisible="manual_destination != 'paybill'"/>
+                                <field name="person_name"/>
+                            </group>
+                            <p>The name is shown when the payment is complete. A till shows the till number. A paybill shows the paybill and account.</p>
+                        </page>
+                        <page string="Authentication Token" invisible="provider != 'buni'">
+                            <group>
+                                <field name="token_url"/>
+                                <field name="grant_type"/>
+                                <field name="consumer_key"/>
+                                <field name="consumer_secret" password="True"/>
+                            </group>
+                        </page>
+                        <page string="SaaSPay" invisible="provider != 'saaspay'">
+                            <group>
+                                <field name="merchant_code"/>
+                                <field name="network_code" placeholder="63902 for M-Pesa, 63903 for Airtel Money"/>
+                                <field name="saaspay_client_id"/>
+                                <field name="saaspay_client_secret" password="True"/>
+                                <field name="saaspay_token_url"/>
+                                <field name="saaspay_request_url"/>
+                                <field name="callback_url" placeholder="https://your-host/kcb_buni/callback"/>
+                            </group>
+                        </page>
+                        <page string="Mpesa Express Service" invisible="provider != 'buni'">
+                            <group string="Request Parameter Definition">
+                                <field name="stk_push_url"/>
+                                <field name="shared_short_code"/>
+                                <field name="org_short_code"/>
+                                <field name="org_pass_key" password="True"/>
+                                <field name="till_number"/>
+                                <field name="callback_url" placeholder="https://your-host/kcb_buni/callback"/>
+                            </group>
+                        </page>
+                        <page string="Payment Channels" invisible="provider != 'buni'">
+                            <group>
+                                <field name="stk_push_url" string="M-Pesa URL"/>
+                                <field name="airtel_url"/>
+                                <field name="card_url"/>
+                            </group>
+                            <p>
+                                A test payment link can be generated for each channel that has a URL.
+                                M-Pesa uses the Mpesa Express URL from the KCB specification.
+                                Airtel Money and Card use the endpoint subscribed on the Buni portal.
+                                The request still sends phoneNumber, amount, invoiceNumber, sharedShortCode, orgShortCode, orgPassKey, callbackUrl, and transactionDescription.
+                            </p>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_kcb_buni_config" model="ir.actions.act_window">
+        <field name="name">Payment Methods</field>
+        <field name="res_model">kcb.buni.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

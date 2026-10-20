@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_kcb_buni_invoice_tree" model="ir.ui.view">
+        <field name="name">kcb.buni.invoice.tree</field>
+        <field name="model">kcb.buni.invoice</field>
+        <field name="arch" type="xml">
+            <list>
+                <header>
+                    <button name="action_open_generate_wizard" type="object" string="Generate Test Payment Link" display="always"/>
+                </header>
+                <field name="invoice_number" string="invoiceNumber"/>
+                <field name="provider"/>
+                <field name="payment_channel"/>
+                <field name="person_name" string="Name" optional="show"/>
+                <field name="phone_number" string="phoneNumber"/>
+                <field name="amount"/>
+                <field name="payment_link" widget="url" optional="show"/>
+                <field name="header_status_code" string="statusCode"/>
+                <field name="merchant_request_id" string="MerchantRequestID"/>
+                <field name="checkout_request_id" string="CheckoutRequestID"/>
+                <field name="result_code" string="ResultCode"/>
+                <field name="mpesa_receipt_number" string="MpesaReceiptNumber"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_kcb_buni_invoice_form" model="ir.ui.view">
+        <field name="name">kcb.buni.invoice.form</field>
+        <field name="model">kcb.buni.invoice</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_payment_link" type="object" string="Open Test Payment Link" class="btn-primary"
+                            invisible="not payment_link"/>
+                    <button name="action_request_payment" type="object" string="Request Payment"
+                            invisible="provider == 'manual' or state not in ('draft', 'failed')"/>
+                    <button name="action_delete_invoice" type="object" string="Delete"
+                            confirm="Delete this test invoice?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,requested,completed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Dummy Invoice">
+                            <field name="config_id"/>
+                            <field name="provider"/>
+                            <field name="manual_destination" invisible="provider != 'manual'"/>
+                            <field name="payment_channel" invisible="provider == 'manual'"/>
+                            <field name="phone_number" invisible="provider == 'manual'"/>
+                            <field name="amount"/>
+                            <field name="account_reference"/>
+                            <field name="invoice_number"/>
+                            <field name="transaction_description"/>
+                            <field name="payment_link" widget="CopyClipboardChar"/>
+                        </group>
+                        <group string="Shown when payment is complete" invisible="state != 'completed'">
+                            <field name="person_name"/>
+                            <field name="till_number" invisible="manual_destination != 'till'"/>
+                            <field name="paybill_number" invisible="manual_destination != 'paybill'"/>
+                            <field name="account_number" invisible="manual_destination != 'paybill'"/>
+                            <field name="mpesa_receipt_number" invisible="provider == 'manual'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Mpesa Express Request">
+                            <group string="Request Parameter Definition">
+                                <field name="phone_number"/>
+                                <field name="amount"/>
+                                <field name="invoice_number"/>
+                                <field name="shared_short_code"/>
+                                <field name="org_short_code"/>
+                                <field name="org_pass_key" password="True"/>
+                                <field name="callback_url"/>
+                                <field name="transaction_description"/>
+                            </group>
+                            <group string="Request Payload">
+                                <field name="request_payload" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Response Payload">
+                            <group string="header">
+                                <field name="header_status_code"/>
+                                <field name="header_status_description"/>
+                            </group>
+                            <group string="response">
+                                <field name="merchant_request_id"/>
+                                <field name="response_code"/>
+                                <field name="customer_message"/>
+                                <field name="checkout_request_id"/>
+                                <field name="response_description"/>
+                                <field name="provider_payment_url" widget="url"/>
+                            </group>
+                            <group string="Response Payload">
+                                <field name="response_payload" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Callback Payload">
+                            <group string="stkCallback">
+                                <field name="merchant_request_id"/>
+                                <field name="checkout_request_id"/>
+                                <field name="result_code"/>
+                                <field name="result_desc"/>
+                            </group>
+                            <group string="CallbackMetadata">
+                                <field name="callback_amount"/>
+                                <field name="mpesa_receipt_number"/>
+                                <field name="balance"/>
+                                <field name="transaction_date"/>
+                                <field name="callback_phone"/>
+                            </group>
+                            <group string="Callback Payload">
+                                <field name="callback_payload" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="HTTP Response Codes">
+                            <group>
+                                <field name="http_status"/>
+                                <field name="fault_code"/>
+                                <field name="fault_message"/>
+                                <field name="fault_description"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_kcb_buni_invoice" model="ir.actions.act_window">
+        <field name="name">Test Invoices</field>
+        <field name="res_model">kcb.buni.invoice</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

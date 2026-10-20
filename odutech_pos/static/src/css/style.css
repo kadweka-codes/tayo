@@ -1,0 +1,11 @@
+.receipt {
+    width: 80mm; /* Adjust the width to your desired size */
+    max-width: 80mm; /* Ensure the width doesn't exceed this size */
+    height: auto; /* Auto height to accommodate the content */
+    margin: 0 auto;
+}
+
+.receipt .pos-receipt {
+    font-size: 12px; /* Adjust the font size to fit more or less content */
+    line-height: 1.2; /* Adjust the line height for spacing between lines */
+}

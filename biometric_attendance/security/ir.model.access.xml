@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+         <record id="group_attendance_executioner" model="res.groups">
+            <field name="name">acc</field>
+        </record>
+
+
+        <record id="attendance_attendance_access_rights" model="ir.model.access">
+                <field name="name">attendance.attendance</field>
+                <field name="model_id" ref="model_attendance_attendance" />
+                <field name="perm_read" eval="1" />
+                <field name="perm_create" eval="1" />
+                <field name="perm_write" eval="1" />
+                <field name="perm_unlink" eval="1" />
+        </record>
+
+        <record id="work_attendance_work_access_rights" model="ir.model.access">
+                <field name="name">work.attendance.work</field>
+                <field name="model_id" ref="model_work_attendance_work" />
+                <field name="perm_read" eval="1" />
+                <field name="perm_create" eval="1" />
+                <field name="perm_write" eval="1" />
+                <field name="perm_unlink" eval="1" />
+        </record>
+
+        <record id="biometric_log_access_rights" model="ir.model.access">
+                <field name="name">biometric.log</field>
+                <field name="model_id" ref="model_biometric_log" />
+                <field name="perm_read" eval="1" />
+                <field name="perm_create" eval="1" />
+                <field name="perm_write" eval="1" />
+                <field name="perm_unlink" eval="0" />
+        </record>
+
+     <record id="dilek_biometric_attendance_report_access_rights" model="ir.model.access">
+                <field name="name">dilek.biometric_attendance.report</field>
+                <field name="model_id" ref="model_dilek_biometric_attendance_report" />
+                <field name="perm_read" eval="1" />
+                <field name="perm_create" eval="1" />
+                <field name="perm_write" eval="1" />
+                <field name="perm_unlink" eval="1" />
+        </record>
+
+
+
+
+     <record id="hr_warning_wizard_access_rights" model="ir.model.access">
+                <field name="name">hr.warning.wizard</field>
+                <field name="model_id" ref="model_hr_warning_wizard" />
+                <field name="perm_read" eval="1" />
+                <field name="perm_create" eval="1" />
+                <field name="perm_write" eval="1" />
+                <field name="perm_unlink" eval="0" />
+        </record>
+
+     <record id="hr_employee_warning_access_rights" model="ir.model.access">
+                <field name="name">hr.employee.warning</field>
+                <field name="model_id" ref="model_hr_employee_warning" />
+                <field name="perm_read" eval="1" />
+                <field name="perm_create" eval="1" />
+                <field name="perm_write" eval="1" />
+                <field name="perm_unlink" eval="0" />
+        </record>
+</odoo>

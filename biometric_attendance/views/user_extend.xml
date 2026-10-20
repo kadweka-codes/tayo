@@ -1,0 +1,15 @@
+<odoo>
+    <record id="extended_res_users" model="ir.ui.view">
+        <field name="name">res.users.extend.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_create_employee']" position="after">
+                <button string="Generate Access Token" name="generate_access_token" type="object"/>
+                </xpath>
+             <xpath expr="//form[1]/sheet[1]/div[not(@name)][2]/group[1]/field[@name='partner_id']" position="after">
+                <field name="access_token"/>
+              </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_pos_order_form_inherit_chatter" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit.chatter</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_start_preparing" type="object" string="Start Preparing"
+                        invisible="kitchen_state not in ('pending', 'assigned')"/>
+                <button name="action_mark_ready" type="object" string="Mark Ready"
+                        invisible="kitchen_state in ('ready', 'served')"/>
+                <button name="action_mark_served" type="object" string="Mark Served"
+                        invisible="kitchen_state == 'served'"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                <group string="Kitchen Display Stats">
+                    <group>
+                        <field name="kitchen_state" readonly="1"/>
+                        <field name="assigned_cook" readonly="1"/>
+                        <field name="cook_delayed" readonly="1"/>
+                        <field name="waiter_delayed" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="cook_assigned_at" readonly="1"/>
+                        <field name="ready_at" readonly="1"/>
+                        <field name="served_at" readonly="1"/>
+                        <field name="cook_stage_minutes" readonly="1"/>
+                        <field name="waiter_stage_minutes" readonly="1"/>
+                        <field name="cook_used_time"/>
+                        <field name="waiter_used_time"/>
+                    </group>
+                </group>
+              </xpath>
+        </field>
+    </record>
+</odoo>

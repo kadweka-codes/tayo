@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="partner_james" model="res.partner">
+            <field name="name">James Otieno</field>
+            <field name="company_type">person</field>
+            <field name="customer_rank">1</field>
+            <field name="phone">254700000201</field>
+            <field name="email">james.otieno@example.com</field>
+            <field name="street">Kimathi Street</field>
+            <field name="city">Nairobi</field>
+            <field name="country_id" ref="base.ke"/>
+        </record>
+        <record id="partner_lucy" model="res.partner">
+            <field name="name">Lucy Njeri</field>
+            <field name="company_type">person</field>
+            <field name="customer_rank">1</field>
+            <field name="phone">254700000202</field>
+            <field name="email">lucy.njeri@example.com</field>
+            <field name="street">Moi Avenue</field>
+            <field name="city">Nairobi</field>
+            <field name="country_id" ref="base.ke"/>
+        </record>
+        <record id="partner_westlands" model="res.partner">
+            <field name="name">Westlands Office Park</field>
+            <field name="company_type">company</field>
+            <field name="customer_rank">1</field>
+            <field name="phone">254700000203</field>
+            <field name="email">accounts@westlands-office.example.com</field>
+            <field name="street">Waiyaki Way</field>
+            <field name="city">Nairobi</field>
+            <field name="country_id" ref="base.ke"/>
+        </record>
+
+        <record id="partner_produce" model="res.partner">
+            <field name="name">Rift Valley Produce</field>
+            <field name="company_type">company</field>
+            <field name="supplier_rank">1</field>
+            <field name="phone">254700000301</field>
+            <field name="email">orders@riftvalley-produce.example.com</field>
+            <field name="street">Kenyatta Avenue</field>
+            <field name="city">Nakuru</field>
+            <field name="country_id" ref="base.ke"/>
+        </record>
+        <record id="partner_fisheries" model="res.partner">
+            <field name="name">Coast Fisheries</field>
+            <field name="company_type">company</field>
+            <field name="supplier_rank">1</field>
+            <field name="phone">254700000302</field>
+            <field name="email">sales@coast-fisheries.example.com</field>
+            <field name="street">Moi Avenue</field>
+            <field name="city">Mombasa</field>
+            <field name="country_id" ref="base.ke"/>
+        </record>
+        <record id="partner_packaging" model="res.partner">
+            <field name="name">Nairobi Packaging</field>
+            <field name="company_type">company</field>
+            <field name="supplier_rank">1</field>
+            <field name="phone">254700000303</field>
+            <field name="email">hello@nairobi-packaging.example.com</field>
+            <field name="street">Enterprise Road</field>
+            <field name="city">Nairobi</field>
+            <field name="country_id" ref="base.ke"/>
+        </record>
+
+        <record id="partner_market" model="res.partner">
+            <field name="name">Dilek Market Supplies</field>
+            <field name="company_type">company</field>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">1</field>
+            <field name="phone">254700000401</field>
+            <field name="email">trade@dilek-market.example.com</field>
+            <field name="street">Tom Mboya Street</field>
+            <field name="city">Nairobi</field>
+            <field name="country_id" ref="base.ke"/>
+        </record>
+    </data>
+</odoo>

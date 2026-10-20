@@ -1,0 +1,42 @@
+<odoo>
+    <record id="point_of_sale_view_pos_order_tree" model="ir.ui.view">
+        <field name="name">pos.order.extend.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="arch" type="xml">
+              <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="payment_confirmed" optional="show"/>
+                <field name="kitchen_state" optional="show"/>
+                <field name="assigned_cook" optional="hide"/>
+                <field name="transaction_matched" optional="hide"/>
+              </xpath>
+        </field>
+    </record>
+
+    <record id="action_point_of_sale_view_pos_order_tree" model="ir.actions.act_window">
+        <field name="name">Pos Order Confirmation</field>
+        <field name="res_model">pos.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('payment_confirmed', '=',False),('state', 'in',['paid','done'])]</field>
+    </record>
+
+    <menuitem id="extend_new_pos_order_confirmation_screen"
+              name="Order Payment Confirmation"
+              groups="odutech_pos.allow_members_confirm_payments"
+              parent="point_of_sale.menu_point_of_sale"
+              action="action_point_of_sale_view_pos_order_tree"
+              sequence="30"/>
+
+    <record id="action_confirm_payment_view" model="ir.actions.server">
+    <field name="name">Confirm Payment Received</field>
+    <field name="model_id" ref="point_of_sale.model_pos_order"/>
+    <field name="binding_model_id" ref="point_of_sale.model_pos_order"/>
+    <field name="binding_view_types">list,form</field>
+    <field name="state">code</field>
+    <field name="code">
+records.confirm_payment_received()
+    </field>
+        <field name="group_ids" eval="[(4, ref('odutech_pos.allow_members_confirm_payments'))]"/>
+</record>
+
+</odoo>

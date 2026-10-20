@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
+            <div class="pos-receipt" style="text-align:center">
+                <div class="pos-receipt-contact">
+                    <t t-if="order.company.id">
+                        <img t-attf-src="/web/image?model=res.company&amp;id={{order.company.id}}&amp;field=logo" alt="Logo" class="pos-receipt-logo"/>
+                    </t>
+                    <div class="pos-receipt-center-align">--------------------------------</div>
+
+                    <div t-if="order.getCashierName()" class="cashier">
+                        <div>Served by <t t-esc="order.getCashierName()" /></div>
+                    </div>
+                    <div t-if="order.table_id">
+                        <div>Table: <t t-esc="order.table_id.table_number or order.table_id.name" /></div>
+                    </div>
+
+                    <div t-if="order.table_id">
+                        <div>Total customers: <t t-esc="order.customer_count"/></div>
+                    </div>
+
+                    <div class="fw-bolder" t-if="order.tracking_number">
+                        <span class="fs-2" t-esc="order.tracking_number" />
+                    </div>
+
+                    <br/>
+
+                    <div class="premier_wallet_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
+                        P-Wallet: <t t-if="order.premier_wallet_number">
+                            <t t-esc="order.premier_wallet_number" />
+                        </t>
+                    </div>
+                    <div class="evc_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin: 0;">
+                        M-Account: <t t-if="order.evc_plus_number">
+                            <t t-esc="order.evc_plus_number" />
+                        </t>
+                    </div>
+                    <div class="e_ahab_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin: 0;">
+                        E-Dahab: <t t-if="order.e_ahab_number">
+                            <t t-esc="order.e_ahab_number" />
+                        </t>
+                    </div>
+                    <div class="my_cash_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
+                        My-Cash: <t t-if="order.my_cash_number">
+                            <t t-esc="order.my_cash_number" />
+                        </t>
+                    </div>
+                    <div class="t_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
+                        T-Plus: <t t-if="order.t_plus_number">
+                            <t t-esc="order.t_plus_number" />
+                        </t>
+                    </div>
+                    <div class="t_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
+                        My Bank: <t t-if="order.my_bank">
+                            <t t-esc="order.my_bank" />
+                        </t>
+                    </div>
+                    <div class="t_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
+                        E-Besa: <t t-if="order.e_besa">
+                            <t t-esc="order.e_besa" />
+                        </t>
+                    </div>
+
+                    <br/>
+
+
+                    <div t-if="order.config.receipt_header" style="white-space:pre-line" t-esc="order.config.receipt_header" />
+
+                    <div class="pos-receipt-order-data">
+                        <div style="text-align:center;font-size: 12px;font-family:Merchant;margin:0;"><t t-esc="order.pos_reference or order.name" /></div>
+                        <div t-if="order.date_order" style="text-align:center;font-size: 12px;font-family:Merchant;margin:0;"><t t-esc="order.date_order" /></div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <table style="font-size:12px;width:100%;">
+                    <tr style="border-bottom:1px black;">
+                        <th style="width: 40%; font-weight: bold;text-align:left">Product</th>
+                        <th style="width: 20%; font-weight: bold" >Unit</th>
+                        <th style="width: 10%;font-weight: bold">Price</th>
+                        <th style="width: 10%;font-weight: bold">Total</th>
+                    </tr>
+
+                    <tr t-foreach="order.lines" t-as="orderline" t-key="orderline.uuid">
+                            <td style="text-align:left;padding-top:1%; padding-bottom:1%;font-size: 12px">
+                                <span class="text-wrap" t-esc="orderline.getFullProductName()"/>
+                                <t t-if="orderline.getCustomerNote()" > <br/>
+                                    <span style="font-size:10px"> note:
+                                        <t t-esc="orderline.getCustomerNote()"/>
+                                    </span>
+                                </t>
+                            </td>
+                            <td style="font-size:12px;">
+                                <span>
+                                    <t t-esc="orderline.getQuantity()"/>
+                                </span>
+                            </td>
+                            <td>
+                                <span style="text-align:right;font-size:12px">
+                                    <t t-esc="orderline.currencyDisplayPriceUnit"/>
+                                </span>
+                            </td>
+                            <td style="font-size:12px;">
+                                <t t-esc="orderline.currencyDisplayPrice"/>
+                            </td>
+                       </tr>
+
+                </table>
+
+                    <!-- Total -->
+                <div class="pos-receipt-right-align">--------</div>
+                <br/>
+                <div class="pos-receipt-amount" style="text-align:center;font-size: 12px;font-family:Merchant;margin:0;">
+                    Net Amount
+                    <span t-esc="formatCurrency(order.priceExcl)" class="pos-receipt-right-align"/>
+                </div>
+                <div class="pos-receipt-amount" style="text-align:center;font-size: 12px;font-family:Merchant;margin:0;">
+                    Vat
+                    <span class="pos-receipt-right-align"><t t-esc="formatCurrency(order.amount_tax)"/></span>
+                </div>
+                <div class="pos-receipt-amount" style="text-align:center;font-weight: 800px,font-size: 12px;font-family:Merchant;margin:0;">
+                    Gross Sales
+                    <span t-esc="formatCurrency(order.priceIncl)" class="pos-receipt-right-align"/>
+                </div>
+                <br/>
+
+                <div class='before-footer' style="text-align:center;font-size: 12px;font-family:Merchant;margin:0;" />
+
+                <div class="pos-receipt-center-align footer" style="white-space:pre-line">
+                   <br/>
+                    <t t-if="order.company.phone">
+                        <div style="text-align: center; font-size: 12px;font-weight: bold">
+<!--                            Tel: <t t-esc="env.services.pos.company.phone" />-->
+                            WE'LL BE SEEING YOU SOON
+                        </div>
+                    </t>
+
+<!--                    <t t-if="env.services.pos.company.email">-->
+<!--                        <div style="text-align: center; font-size: 12px;">Email: <t t-esc="env.services.pos.company.email" /></div>-->
+<!--                    </t>-->
+                    <br/>
+                    <br/>
+                </div>
+
+            </div>
+        </xpath>
+    </t>
+</templates>

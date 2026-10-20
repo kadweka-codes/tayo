@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hr_warning_wizard_form" model="ir.ui.view">
+        <field name="name">hr.warning.wizard.form</field>
+        <field name="model">hr.warning.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send Warning">
+                <group>
+                    <group>
+                        <field name="warning_date"/>
+                        <field name="warning_type"/>
+                    </group>
+                    <group>
+                        <field name="employee_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="reason" placeholder="Explain the reason for the warning..."/>
+                </group>
+                <footer>
+                    <button name="action_confirm_warning" string="Issue Warning" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_warning_wizard" model="ir.actions.act_window">
+        <field name="name">Issue Warning</field>
+        <field name="res_model">hr.warning.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_hr_employee_warning_wizard"
+              name="Employee Warning"
+              parent="hr.menu_hr_root"
+              sequence="10"/>
+
+    <menuitem id="menu_hr_warning_wizard"
+              name="Issue Warning"
+              parent="menu_hr_employee_warning_wizard"
+              action="action_hr_warning_wizard"
+              sequence="20"/>
+</odoo>

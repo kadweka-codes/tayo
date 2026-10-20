@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="whatsapp_config_access_rights" model="ir.model.access">
+        <field name="name">whatsapp_config_access_rights</field>
+        <field name="model_id" ref="model_whatsapp_config"/>
+        <field name="group_id" ref="base.group_system"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="whatsapp_message_access_rights" model="ir.model.access">
+        <field name="name">whatsapp_message_access_rights</field>
+        <field name="model_id" ref="model_whatsapp_message"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="whatsapp_text_template_system_access" model="ir.model.access">
+        <field name="name">whatsapp.text.template.system</field>
+        <field name="model_id" ref="model_whatsapp_text_template"/>
+        <field name="group_id" ref="base.group_system"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="whatsapp_text_template_pos_manager_access" model="ir.model.access">
+        <field name="name">whatsapp.text.template.pos.manager</field>
+        <field name="model_id" ref="model_whatsapp_text_template"/>
+        <field name="group_id" ref="point_of_sale.group_pos_manager"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="whatsapp_message_system_access_rights" model="ir.model.access">
+        <field name="name">whatsapp_message_system_access_rights</field>
+        <field name="model_id" ref="model_whatsapp_message"/>
+        <field name="group_id" ref="base.group_system"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>

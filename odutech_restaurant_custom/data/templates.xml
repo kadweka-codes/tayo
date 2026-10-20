@@ -1,0 +1,1952 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- To Manager: After employee submits the Block Crop program -->
+    <record id="mail_template_block_crop_program_submitted" model="mail.template">
+        <field name="name">Block Crop Program: Submitted For Approval</field>
+        <field name="model_id" ref="farm-management.model_block_crop_program" />
+        <field name="subject">Block Crop Program Approval Request For {{object.name}}</field>
+        <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+        <field name="email_to">{{object.block_manager_id.work_email}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Block Crop Program</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.block_manager_id.name or ''">,</t>,<br /><br />
+                                                        The Block Crop Program numbered: <t t-out="object.name">Block ID
+                                                        </t> has been submitted.<br />
+                                                        Use the following link to review Block Crop Program.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                Block Crop Program
+                                                            </a>
+                                                        </div>
+                                                        If you do not expect this, you can safely ignore this
+                                                        email.<br /><br />
+                                                        Thanks,
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To Manager: After employee submits the Block Crop program -->
+    
+
+
+    <!-- To User: After Manager activates the Block Crop program -->
+    <record id="mail_template_block_crop_program_activated" model="mail.template">
+        <field name="name">Block Crop Program: Set to Active</field>
+        <field name="model_id" ref="farm-management.model_block_crop_program" />
+        <field name="subject">Block Crop Program {{object.name}} Set to Active </field>
+        <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+        <field name="email_to">{{object.user_id.login}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Block Crop Program</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t>,<br /><br />
+
+                                                        The Block Crop Program numbered: <t t-out="object.name">Block ID
+                                                        </t> has been approved and set to active.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Block Crop Program.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                Block Crop Program
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+
+    <!-- To User: After Manager closes the Block Crop program -->
+    <record id="mail_template_block_crop_program_closed" model="mail.template">
+        <field name="name">Block Crop Program: Closed</field>
+        <field name="model_id" ref="farm-management.model_block_crop_program" />
+        <field name="subject">Block Crop Program {{object.name}} Closed </field>
+        <field name="email_from">{{ (object.block_manager_id.work_email) }}</field>
+        <field name="email_to">{{object.user_id.login}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Block Crop Program</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t>,<br /><br />
+
+                                                        The Block Crop Program numbered: <t t-out="object.name">Block ID
+                                                        </t> has been closed.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Block Crop Program.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                Block Crop Program
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager cancels the Block Crop Program Request -->
+    <record id="mail_template_block_crop_program_cancelled" model="mail.template">
+        <field name="name">Block Crop Program: Cancelled</field>
+        <field name="model_id" ref="farm-management.model_block_crop_program" />
+        <field name="subject">Block Crop Program {{object.name}} Cancelled </field>
+        <field name="email_from">{{ (object.block_manager_id.work_email) }}</field>
+        <field name="email_to">{{object.user_id.login}}</field>
+        <field name="body_html" type="html">
+            <![CDATA[ ]]>
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Block Crop Program</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t>,<br /><br />
+
+                                                        The Block Crop Program numbered: <t t-out="object.name">Block ID
+                                                        </t> has been
+                                                        cancelled.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Block Crop Program.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                Block Crop Program
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To Manager: After User submits the Material Request -->
+    <record id="mail_template_material_request_submitted" model="mail.template">
+        <field name="name">Material Request: Submitted</field>
+        <field name="model_id" ref="farm-management.model_material_request" />
+        <field name="subject">Material Request {{object.name}} Submitted </field>
+        <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+        <field name="email_to"></field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Material Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear Manager,<br /><br />
+
+                                                        The Material Request numbered: <t t-out="object.name">Material Request ID
+                                                        </t> has been submitted.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Material Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Material Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.user_id.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager approves the Material Request -->
+    <record id="mail_template_material_request_approved" model="mail.template">
+        <field name="name">Material Request: Approved</field>
+        <field name="model_id" ref="farm-management.model_material_request" />
+        <field name="subject">Material Request {{object.name}} Approved </field>
+        <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Material Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Material Request numbered: <t t-out="object.name">Material Request ID
+                                                        </t> has been approved.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Material Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Material Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager cancels the Material Request -->
+    <record id="mail_template_material_request_cancelled" model="mail.template">
+        <field name="name">Material Request: Cancelled</field>
+        <field name="model_id" ref="farm-management.model_material_request" />
+        <field name="subject">Material Request {{object.name}} Cancelled </field>
+        <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Material Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Material Request numbered: <t t-out="object.name">Material Request ID
+                                                        </t> has been
+                                                        cancelled.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Material Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Material Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To Manager: After User submits the Tool Request -->
+    <record id="mail_template_tool_request_submitted" model="mail.template">
+        <field name="name">Tool Request: Submitted</field>
+        <field name="model_id" ref="farm-management.model_tool_request" />
+        <field name="subject">Tool Request {{object.name}} Submitted </field>
+        <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+        <field name="email_to"></field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Tool Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear Manager,<br /><br />
+
+                                                        The Tool Request numbered: <t t-out="object.name">Tool Request ID
+                                                        </t> has been submitted.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Tool Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Tool Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.user_id.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager approves the Tool Request -->
+    <record id="mail_template_tool_request_approved" model="mail.template">
+        <field name="name">Tool Request: Approved</field>
+        <field name="model_id" ref="farm-management.model_tool_request" />
+        <field name="subject">Tool Request {{object.name}} Approved </field>
+        <field name="email_from">{{ (object.user_id.company_id.email) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Tool Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Tool Request numbered: <t t-out="object.name">Tool Request ID
+                                                        </t> has been approved.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Tool Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Tool Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager cancels the Tool Request -->
+    <record id="mail_template_tool_request_cancelled" model="mail.template">
+        <field name="name">Tool Request: Cancelled</field>
+        <field name="model_id" ref="farm-management.model_tool_request" />
+        <field name="subject">Tool Request for {{object.name}} Cancelled </field>
+        <field name="email_from">{{ (object.user_id.company_id.email) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <![CDATA[ ]]>
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Tool Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Tool Request numbered: <t t-out="object.name">Tool Request ID
+                                                        </t> has been
+                                                        cancelled.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Tool Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a href="/web#id={object.request_tool_id.id}&amp;view_type=form&amp;model=tool.request"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Tool Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+
+    <!-- To User: After Manager confirms the Tool Request is returned -->
+    <record id="mail_template_tool_request_returned" model="mail.template">
+        <field name="name">Tool Request: Returned</field>
+        <field name="model_id" ref="farm-management.model_tool_request" />
+        <field name="subject">Tool Requested {{object.name}} Returned </field>
+        <field name="email_from">{{ (object.user_id.company_id.email) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Tool Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Tool Request numbered: <t t-out="object.name">Tool Request ID
+                                                        </t> has been
+                                                        returned.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Tool Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Tool Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To Manager: After User submits the Planting Request -->
+    <record id="mail_template_planting_request_submitted" model="mail.template">
+        <field name="name">Planting Request: Submitted</field>
+        <field name="model_id" ref="farm-management.model_planting_request" />
+        <field name="subject">Planting Request {{object.name}} Submitted </field>
+        <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+        <field name="email_to"></field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Planting Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <!-- <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear Manager,<br /><br />
+
+                                                        The Planting Request numbered: <t t-out="object.name">Planting Request ID
+                                                        </t> has been
+                                                        submitted.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Planting Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Planting Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr> -->
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager approves the planting Request -->
+    <record id="mail_template_planting_request_approved" model="mail.template">
+        <field name="name">Planting Request: Approved</field>
+        <field name="model_id" ref="farm-management.model_planting_request" />
+        <field name="subject">Planting Request {{object.name}} Approved </field>
+        <field name="email_from">{{ (object.user_id.company_id.email) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Planting Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Planting Request numbered: <t t-out="object.name">Planting Request ID
+                                                        </t> has been approved.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Planting Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Planting Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager cancels the Planting Request -->
+    <record id="mail_template_planting_request_cancelled" model="mail.template">
+        <field name="name">Planting Request: Cancelled</field>
+        <field name="model_id" ref="farm-management.model_planting_request" />
+        <field name="subject">Planting Request {{object.name}} Cancelled </field>
+        <field name="email_from">{{ (object.user_id.company_id.email) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Planting Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Planting Request numbered: <t t-out="object.name">Planting Request ID
+                                                        </t>has been
+                                                        cancelled.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Planting Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Planting Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- To User: After Manager changes the Planting Request Stage -->
+    <record id="mail_template_planting_request_stage_changed" model="mail.template">
+        <field name="name">Planting Request: Stage Changed</field>
+        <field name="model_id" ref="farm-management.model_planting_request" />
+        <field name="subject">Planting Request {{object.name}} Stage Changed </field>
+        <field name="email_from">{{ (object.user_id.company_id.email) }}</field>
+        <field name="email_to">{{object.user_id.email_formatted}}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Planting Request</span><br />
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                        <t t-out="object.name or ''">,</t>
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ object.user_id.company_id.id }}"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="object.user_id.company_id.name" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div>
+                                                        Dear <t t-out="object.user_id.name or ''">,</t><br /><br />
+
+                                                        The Planting Request numbered: ${object.name} has been changed
+                                                        the stage to ${object.stage_id.name}.
+                                                        <br /><br />
+
+                                                        Use the following link to access the Planting Request.
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <a t-att-href="object.access_url"
+                                                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                View Planting Request
+                                                            </a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                            style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="object.user_id.company_id.name or ''">,</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-out="object.user_id.company_id.phone or ''">,</t>
+
+                                                    <t t-if="object.user_id.company_id.email">
+                                                        | <a t-att-href="'mailto:%s' % object.user_id.company_id.email"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.email or ''">,</a>
+                                                    </t>
+                                                    <t t-if="object.user_id.company_id.website">
+                                                        | <a t-att-href="'%s' % object.company_id.website"
+                                                            style="text-decoration:none; color: #454748;"
+                                                            t-out="object.user_id.company_id.website or ''">,</a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                            style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by <a target="_blank"
+                                        href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth"
+                                        style="color: #875A7B;">Odoo</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+
+</odoo>

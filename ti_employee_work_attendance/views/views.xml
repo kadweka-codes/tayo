@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+
+     <record id="employee_policy_view_form" model="ir.ui.view">
+        <field name="name">Attendance Policy</field>
+        <field name="model">ti.atten.policy</field>
+        <field name="arch" type="xml">
+            <form string="Employee Outward Gatepass">
+
+                <sheet>
+                   <group>
+                        <group>
+                            <field name="security"/>
+                            <field name="security_time" invisible="security == False"/>
+                            <field name="Driver"/>
+                            <field name="Driver_time" invisible="Driver == False"/>
+                            <field name="cleaner"/>
+                            <field name="cleaner_time" invisible="cleaner == False"/>
+
+
+                        </group>
+                       <group>
+                           <field name="technician"/>
+                            <field name="technician_time" invisible="technician == False"/>
+                            <field name="imam"/>
+                            <field name="imam_time" invisible="imam == False"/>
+                       </group>
+
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <record id="employee_policy_view_tree" model="ir.ui.view">
+        <field name="name">Attendance Policy</field>
+        <field name="model">ti.atten.policy</field>
+        <field name="arch" type="xml">
+            <list string="Record rules">
+                <field name="name"/>
+
+            </list>
+        </field>
+    </record>
+    <record id="employee_policy_window_action" model="ir.actions.act_window">
+        <field name="name">Attendance Policy</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ti.atten.policy</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="employee_policy_view_tree"/>
+        <!--        <field name="target">new</field>-->
+    </record>
+
+
+
+
+
+    <menuitem id="employee_policy_menu_root"
+              name="Attendance Policy"
+              parent="hr.menu_human_resources_configuration"
+              action="employee_policy_window_action"
+              sequence="20"/>
+
+
+
+    <record id="employee_work_view_form" model="ir.ui.view">
+        <field name="name">ti.work.type.form</field>
+        <field name="model">ti.work.type</field>
+        <field name="arch" type="xml">
+            <form string="Employee Outward Gatepass">
+<!--                <header>-->
+<!--                                    <button name="make_work" string="Calculate" type="object"/>-->
+<!--&lt;!&ndash;                                    <button name="action_time_out" string="Check Out" type="object"/>&ndash;&gt;-->
+
+
+<!--                </header>-->
+                <sheet>
+                   <group>
+                        <group>
+                            <field name="name"/>
+
+                        </group>
+                        
+                    </group>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <record id="employee_work_view_tree" model="ir.ui.view">
+        <field name="name">ti.work.type.Tree.View</field>
+        <field name="model">ti.work.type</field>
+        <field name="arch" type="xml">
+            <list string="Record rules">
+                <field name="name"/>
+
+            </list>
+        </field>
+    </record>
+    <record id="employee_work_window_action" model="ir.actions.act_window">
+        <field name="name">Work Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ti.work.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="employee_work_view_tree"/>
+        <!--        <field name="target">new</field>-->
+    </record>
+
+
+
+
+
+    <menuitem id="employee_work_menu_root"
+              name="Work Type"
+              parent="hr.menu_human_resources_configuration"
+              action="employee_work_window_action"
+              sequence="20"/>
+
+
+
+
+    <record id="employee_Roster_view_form" model="ir.ui.view">
+        <field name="name">ti.work.type.form</field>
+        <field name="model">ti.attendance.roster</field>
+        <field name="arch" type="xml">
+            <form string="Employee Outward Gatepass">
+                <header>
+                                    <button name="make_work" string="Conform" type="object" invisible="state !='draft'"/>
+                                    <button name="action_done" string="Done" type="object" invisible="state !='confirmed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+
+
+                </header>
+                <sheet>
+                 <group>
+                        <group>
+                            <field name="user_id" readonly="state !='draft'"/>
+                            <field name="date" readonly="state !='draft'"/>
+
+                        </group>
+                     <group>
+                         <field name="company_id" readonly="state !='draft'"/>
+
+                     </group>
+
+                    </group>
+
+                    <notebook>
+                        <page string="Roster">
+                            <field name="direct_line">
+                                <list editable="bottom" delete="0">
+
+<!--                                    <control>-->
+<!--                                    <create name="add_product_control" string="Add a product"/>-->
+<!--                                    <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>-->
+<!--                                    <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>-->
+<!--&lt;!&ndash;                                    <button name="action_add_from_catalog" string="Catalog" type="object" class="px-4 btn-link" context="{'roster_id': parent.id}"/>&ndash;&gt;-->
+<!--                                </control>-->
+<!--                                    <field name="display_type" invisible="1"/>-->
+                                    <field name="employee_id" readonly="ti_employee_type in ['imam','cleaner']"/>
+                                    <field name="ti_employee_type"/>
+
+                                    <field style="text-align:left; width:300%;" name="time" widget="float_time" readonly="ti_employee_type in ['imam','cleaner']"/>
+
+                                    <field name="datetime2"/>
+
+                                    <field name="datetimecheck" invisible="1"/>
+                                    <field name="work_id" readonly="datetimecheck == True"/>
+                                    <field name="attendance_marked_str"/>
+                                    <field name="user_id"/>
+
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+    <record id="employee_Roster_view_tree" model="ir.ui.view">
+        <field name="name">ti.work.type.Tree.View</field>
+        <field name="model">ti.attendance.roster</field>
+        <field name="arch" type="xml">
+            <list string="Record rules">
+                <field name="user_id"/>
+                <field name="company_id"/>
+                <field name="date"/>
+
+            </list>
+        </field>
+    </record>
+    <record id="employee_Roster_window_action" model="ir.actions.act_window">
+        <field name="name">Attendance Roster</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ti.attendance.roster</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="employee_Roster_view_tree"/>
+        <!--        <field name="target">new</field>-->
+    </record>
+
+
+
+
+
+    <menuitem id="employee_Roster_menu_root"
+              name="Attendance Roster"
+              parent="hr.menu_human_resources_configuration"
+              action="employee_Roster_window_action"
+              sequence="20"/>
+
+
+</odoo>

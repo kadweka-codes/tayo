@@ -1,0 +1,25 @@
+<odoo>
+
+
+	<record id="hr_employee_form_inherits" model="ir.ui.view">
+        <field name="name">hr.employee</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]/group[1]/group[2]/field[@name='coach_id']" position="after">
+                <field name="ti_employee_type"/>
+            </xpath>
+        </field>
+    </record>
+
+	<record model="ir.cron" id="attendance_cron">
+		<field name="name">Grant badge</field>
+		<field name="model_id" ref="model_hr_employee"/>
+		<field name="interval_number">1</field>
+		<field name="interval_type">days</field>
+		<field name="state">code</field>
+		<field name="code">model.action_grant_badge_ti()</field>
+	</record>
+
+
+</odoo>

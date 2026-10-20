@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="whatsapp_text_order_assigned" model="whatsapp.text.template">
+        <field name="name">Order assigned to cook</field>
+        <field name="code">order_assigned_cook</field>
+        <field name="send_to">cook</field>
+        <field name="body">Dear {{NameOfCook}},
+Order Number {{OrderNumber}} has been assigned to you.
+The table. Number is {{TableNumber}}
+The order has the items to be prepared
+{{Items}}
+
+{{SpecialInstructions}}
+
+Cashier
+{{NameOfWaiterOrCashier}}</field>
+    </record>
+    <record id="whatsapp_text_order_ready" model="whatsapp.text.template">
+        <field name="name">Order ready for waiter</field>
+        <field name="code">order_ready_waiter</field>
+        <field name="send_to">waiter</field>
+        <field name="body">Dear {{NameOfWaiterWhoPlacedOrder}},
+Order Number {{OrderNumber}} ,
+For Table Number {{TableNumber}},
+Is ready ,please pick it up and serve the customer
+
+Best Regards
+{{NameOfCook}}</field>
+    </record>
+</odoo>

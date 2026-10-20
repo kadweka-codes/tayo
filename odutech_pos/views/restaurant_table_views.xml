@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_restaurant_table_sequence" model="ir.ui.view">
+        <field name="name">restaurant.table.sequence</field>
+        <field name="model">restaurant.table</field>
+        <field name="inherit_id" ref="pos_restaurant.view_restaurant_table_form"/>
+        <field name="arch" type="xml">
+            <field name="table_number" position="after">
+                <field name="sequence" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_restaurant_table_management" model="ir.actions.act_window">
+        <field name="name">Table Management</field>
+        <field name="res_model">restaurant.table</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+            id="menu_restaurant_table_management"
+            action="action_restaurant_table_management"
+            parent="point_of_sale.menu_point_config_product"
+            name="Tables Management"
+            sequence="49"/>
+</odoo>

@@ -1,0 +1,45 @@
+<odoo>
+    <record id="ir_cron_n8n_transaction_pull" model="ir.cron">
+        <field name="name">N8N TRANSACTION: 1. Data Pull and Fetch</field>
+        <field name="model_id" ref="model_external_api_sync"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_sync_data_from_online()</field>
+        <field name="interval_type">minutes</field>
+        <field name="interval_number">15</field>
+        <field name="priority">5</field>
+        <field name="active">1</field>
+    </record>
+
+    <record id="ir_cron_n8n_transaction_lines_process" model="ir.cron">
+        <field name="name">N8N TRANSACTION: 2. Process Order Lines/Points</field>
+        <field name="model_id" ref="model_odutech_n8n"/>
+        <field name="state">code</field>
+        <field name="code">model.action_process_order_lines()</field>
+        <field name="interval_type">minutes</field>
+        <field name="interval_number">15</field>
+        <field name="priority">6</field>
+        <field name="active">1</field>
+    </record>
+
+    <record id="ir_cron_iot_people_counting_alert" model="ir.cron">
+        <field name="name">IOT COUNTING: Alert waiters when guests are waiting</field>
+        <field name="model_id" ref="model_iot_people_counting"/>
+        <field name="state">code</field>
+        <field name="code">model.action_pull_people_counting_in_restaurant()</field>
+        <field name="interval_type">minutes</field>
+        <field name="interval_number">2</field>
+        <field name="priority">5</field>
+        <field name="active">1</field>
+    </record>
+
+    <record id="ir_cron_kitchen_assignment" model="ir.cron">
+        <field name="name">Kitchen: assign cooks and notify floor staff</field>
+        <field name="model_id" ref="point_of_sale.model_pos_order"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_progress_kitchen()</field>
+        <field name="interval_type">minutes</field>
+        <field name="interval_number">2</field>
+        <field name="priority">5</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

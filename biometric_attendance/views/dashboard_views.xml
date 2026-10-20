@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="action_owl_home_parent_dashboard" model="ir.actions.client">
+            <field name="name">Home Dashboard</field>
+            <field name="tag">owl.home_finance_dashboard</field>
+        </record>
+
+        <menuitem name="Employee Stats Report"
+                  id="home_expense_dashboard_view_center"
+                  parent="biometric_attendance.zkteko_integration"
+                  sequence="1"
+                  action="action_owl_home_parent_dashboard"/>
+    </data>
+</odoo>

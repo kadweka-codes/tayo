@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <record id="view_biometric_log_form" model="ir.ui.view">
+            <field name="name">biometric.log.form</field>
+            <field name="model">biometric.log</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="employee_id"  readonly="1"/>
+                            <field name="employee_code"  readonly="1"/>
+                            <field name="punch_time" readonly="1"/>
+                            <field name="punch_state" readonly="1"/>
+                            <field name="is_processed" readonly="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" />
+                        <field name="activity_ids" />
+                        <field name="message_ids" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_biometric_log_tree" model="ir.ui.view">
+            <field name="name">attendance.tree</field>
+            <field name="model">biometric.log</field>
+            <field name="arch" type="xml">
+                <list decoration-danger="is_processed != True" decoration-success="is_processed">
+                    <field name="employee_id" />
+                    <field name="employee_code" />
+                    <field name="punch_time" />
+                    <field name="punch_state" />
+                    <field name="is_processed" />
+                </list>
+            </field>
+        </record>
+
+        <record id="action_biometric_log_view" model="ir.actions.act_window">
+            <field name="name">Biometric Logs</field>
+            <field name="res_model">biometric.log</field>
+            <field name="view_mode">list,form</field>
+        </record>
+  </data>
+</odoo>

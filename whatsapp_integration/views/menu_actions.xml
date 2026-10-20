@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+            id="whatsapp_integration_configuration_menu_action"
+            action="whatsapp_integration_configuration_action"
+            parent="point_of_sale.menu_point_config_product"
+            name="WhatsApp Config"
+            groups="base.group_system"
+            sequence="50"/>
+    <menuitem
+            id="whatsapp_text_template_menu"
+            action="whatsapp_text_template_action"
+            parent="point_of_sale.menu_point_config_product"
+            name="WhatsApp Text Messages"
+            groups="base.group_system"
+            sequence="52"/>
+    <menuitem
+            id="whatsapp_message_menu_action"
+            action="whatsapp_message_action"
+            parent="point_of_sale.menu_point_config_product"
+            name="WhatsApp Messages"
+            sequence="51"/>
+</odoo>

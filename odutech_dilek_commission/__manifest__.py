@@ -1,0 +1,25 @@
+{
+    'name': 'Dilek Commission',
+    'description': 'Department commission pools, account categories, and employee allowances.',
+    'summary': 'Department commission pools and employee allowances',
+    'category': 'Human Resources',
+    'version': '19.0.1.2.0',
+    'author': 'Odutech Solutions',
+    'company': 'Odutech Solutions',
+    'maintainer': 'Odutech Solutions',
+    'website': "https://www.odutechsolutions.com",
+    'depends': ['hr', 'account', 'odutech_pos'],
+    'data': [
+        "security/security.xml",
+        "views/employees_view.xml",
+        "views/commission_configuration.xml",
+        "views/commission_menu_view.xml",
+    ],
+    'images': [
+        'static/description/banner.png',
+    ],
+    'license': 'LGPL-3',
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

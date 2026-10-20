@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="payment_link_page">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>Test payment <t t-esc="invoice.invoice_number"/></title>
+                <style>
+                    body { font-family: sans-serif; background: #f6f7f9; color: #1f2933; margin: 0; }
+                    main { max-width: 420px; margin: 48px auto; background: #fff; padding: 28px; border-radius: 12px; }
+                    h1 { font-size: 20px; margin: 0 0 8px; }
+                    p { margin: 8px 0; }
+                    label { display: block; margin-top: 16px; font-size: 14px; }
+                    input { width: 100%; box-sizing: border-box; margin-top: 6px; padding: 10px; font-size: 16px; }
+                    button { margin-top: 18px; width: 100%; padding: 12px; font-size: 16px; background: #0b6e4f; color: #fff; border: 0; border-radius: 8px; }
+                    .note { color: #52606d; font-size: 13px; }
+                    .ok { background: #e3f9e5; padding: 10px; border-radius: 8px; }
+                    .bad { background: #ffe3e3; padding: 10px; border-radius: 8px; }
+                    a { color: #0b6e4f; }
+                </style>
+            </head>
+            <body>
+                <main>
+                    <p class="note">Test payment</p>
+                    <h1 t-esc="channel_label"/>
+                    <p>invoiceNumber <strong t-esc="invoice.invoice_number"/></p>
+                    <p>amount <strong t-esc="invoice.amount"/></p>
+                    <p t-if="invoice.transaction_description">transactionDescription <t t-esc="invoice.transaction_description"/></p>
+                    <p t-if="message" class="ok" t-esc="message"/>
+                    <p t-if="error" class="bad" t-esc="error"/>
+                    <div t-if="invoice.provider == 'manual' and invoice.state != 'completed'">
+                        <p t-if="invoice.manual_destination == 'till'">Till <strong t-esc="invoice.till_number"/></p>
+                        <p t-if="invoice.manual_destination == 'paybill'">Paybill <strong t-esc="invoice.paybill_number"/></p>
+                        <p t-if="invoice.manual_destination == 'paybill'">Account <strong t-esc="invoice.account_number"/></p>
+                    </div>
+                    <div t-if="invoice.state == 'completed'" class="ok">
+                        <p>Payment completed.</p>
+                        <p t-if="invoice.manual_destination == 'till'">Till <strong t-esc="invoice.till_number"/></p>
+                        <p t-if="invoice.manual_destination == 'paybill'">Paybill <strong t-esc="invoice.paybill_number"/></p>
+                        <p t-if="invoice.manual_destination == 'paybill'">Account <strong t-esc="invoice.account_number"/></p>
+                        <p t-if="invoice.person_name">Name <strong t-esc="invoice.person_name"/></p>
+                        <p t-if="invoice.mpesa_receipt_number">MpesaReceiptNumber <strong t-esc="invoice.mpesa_receipt_number"/></p>
+                    </div>
+                    <p t-if="invoice.result_desc and invoice.state != 'completed'" t-esc="invoice.result_desc"/>
+                    <p t-if="invoice.provider_payment_url">
+                        <a t-att-href="invoice.provider_payment_url">Continue on the provider payment page</a>
+                    </p>
+                    <form t-if="invoice.state != 'completed' and invoice.provider == 'manual'" method="post">
+                        <input type="hidden" name="complete" value="1"/>
+                        <button type="submit">I have paid</button>
+                    </form>
+                    <form t-if="invoice.state != 'completed' and invoice.provider != 'manual'" method="post">
+                        <label>phoneNumber
+                            <input name="phoneNumber" t-att-value="invoice.phone_number" required="required"/>
+                        </label>
+                        <button type="submit">Pay now</button>
+                    </form>
+                </main>
+            </body>
+        </html>
+    </template>
+
+    <template id="payment_link_missing">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <title>Payment link not found</title>
+            </head>
+            <body>
+                <p>This test payment link is no longer available.</p>
+            </body>
+        </html>
+    </template>
+</odoo>

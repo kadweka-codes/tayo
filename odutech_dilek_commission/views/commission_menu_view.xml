@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Commission Configuration menu item -->
+    <menuitem 
+    id="commission_configuration_menu_action"
+    name="Commission"
+    parent="hr.menu_hr_employee_payroll"
+    action="odutech_dilek_commission.dilek_commission_configuration_action"
+    />
+
+    <menuitem
+    id="performance_configuration_menu_action"
+    name="Performance Category"
+    parent="hr.menu_hr_employee_payroll"
+    action="odutech_dilek_commission.dilek_performance_configuration_action"
+    />
+</odoo>

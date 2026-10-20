@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Pos order Form view inheriting and xpath a field   -->
+    <record id="hr_updated_employees_inherit_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='work_email']" position="after">
+                <field name="employee_number"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                <page string="Warning History">
+                    <field name="warning_ids">
+                        <list decoration-danger="warning_type == 'termination'" decoration-warning="warning_type in ('final_warning', 'perm_disciplinary')" create="false" edit="false">
+                            <field name="warning_date"/>
+                            <field name="warning_type" widget="badge" decoration-danger="warning_type == 'termination'" decoration-warning="warning_type in ('final_warning', 'perm_disciplinary')"/>
+                            <field name="description"/>
+                        </list>
+                    </field>
+                </page>
+        </xpath>
+        </field>
+    </record>
+
+    <record id="res_employee_form_view_settings" model="ir.ui.view">
+        <field name="name">res.company.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                <page string="Default Reports Configurations">
+                    <group>
+                        <group>
+                            <field name="employee_budget_number"/>
+                            <field name="employee_on_verbal_warning"/>
+                            <field name="employee_on_written_warning_1"/>
+                            <field name="employee_on_written_warning_2"/>
+                            <field name="employees_suspended"/>
+                            <field name="employees_under_probation"/>
+                            <field name="employee_on_final_warning"/>
+                            <field name="employee_terminated_due_discipline"/>
+                            <field name="number_of_new_hired_employees"/>
+                        </group>
+                        <group>
+                            <field name="employees_on_active_duty"/>
+                            <field name="employees_on_paid_leave"/>
+                            <field name="employees_on_unpaid_leave"/>
+                            <field name="overall_default_attendance_rate"/>
+                            <field name="employee_late_arrivals_budget"/>
+                            <field name="employee_absenteeism_rate"/>
+                        </group>
+                    </group>
+                </page>
+        </xpath>
+        </field>
+    </record>
+
+    <record id="hr_leave_type_inherit_view_form" model="ir.ui.view">
+        <field name="name">hr.leave.type.inherit</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='requires_allocation']" position="after">
+                <field name="is_paid_leave"/>
+                <field name="is_unpaid_leave"/>
+                </xpath>
+        </field>
+    </record>
+</odoo>

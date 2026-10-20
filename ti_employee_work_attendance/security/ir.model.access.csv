@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ti_work_type,access_ti_work_type,model_ti_work_type,,1,1,1,1
+access_ti_attendance_roster,access_ti_attendance_roster,model_ti_attendance_roster,,1,1,1,1
+access_ti_attendance_roster_line,access_ti_attendance_roster_line,model_ti_attendance_roster_line,,1,1,1,1
+access_ti_atten_policy,access_ti_atten_policy,model_ti_atten_policy,,1,1,0,0
+
+
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ========================================================= -->
+    <!-- TREE VIEW -->
+    <!-- ========================================================= -->
+    <record id="view_iot_people_counting_tree" model="ir.ui.view">
+        <field name="name">iot.people.counting.tree</field>
+        <field name="model">iot.people.counting</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active" invisible="1"/>
+                <field name="url"/>
+                <field name="port"/>
+                <field name="username"/>
+                <field name="last_people_count"/>
+                <field name="last_data_sync"/>
+                <field name="last_alert_at"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- FORM VIEW -->
+    <!-- ========================================================= -->
+    <record id="view_iot_people_counting_form" model="ir.ui.view">
+        <field name="name">iot.people.counting.form</field>
+        <field name="model">iot.people.counting</field>
+        <field name="arch" type="xml">
+            <form string="Iot API Configuration">
+                <header>
+                     <button name="action_pull_people_counting_in_restaurant"
+                                string="Test People Counting"
+                                type="object"
+                                class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="url"/>
+                        <field name="port"/>
+                        <field name="username"/>
+                        <field name="password" password="True"/>
+                        <field name="active"/>
+                        <field name="alert_cooldown_minutes"/>
+                        <field name="last_people_count"/>
+                        <field name="last_alert_at"/>
+                        <field name="last_data_sync"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- ACTION -->
+    <!-- ========================================================= -->
+    <record id="action_iot_people_counting" model="ir.actions.act_window">
+        <field name="name">Iot API Configuration</field>
+        <field name="res_model">iot.people.counting</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- MENU ITEMS -->
+    <!-- ========================================================= -->
+
+    <menuitem id="menu_iot_people_counting"
+              name="Iot Api Configurations"
+              parent="point_of_sale.menu_point_rep"
+              action="action_iot_people_counting"
+              sequence="100"/>
+
+</odoo>

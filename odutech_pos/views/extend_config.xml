@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ========================================================= -->
+    <!-- TREE VIEW -->
+    <!-- ========================================================= -->
+    <record id="view_external_api_sync_tree" model="ir.ui.view">
+        <field name="name">external.api.sync.tree</field>
+        <field name="model">external.api.sync</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active" invisible="1"/>
+                <field name="url"/>
+                <field name="view_id"/>
+                <field name="offset"/>
+                <field name="limit"/>
+                <field name="last_data_sync"/>
+                <field name="last_count"/>
+                <field name="last_error"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- FORM VIEW -->
+    <!-- ========================================================= -->
+    <record id="view_external_api_sync_form" model="ir.ui.view">
+        <field name="name">external.api.sync.form</field>
+        <field name="model">external.api.sync</field>
+        <field name="arch" type="xml">
+            <form string="API Sync Configuration">
+                <header>
+                     <button name="action_test_connection"
+                                string="Test Connection"
+                                type="object"/>
+                     <button name="cron_sync_data_from_online"
+                                string="Sync n8n Data"
+                                type="object"
+                                class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                        <field name="name"/>
+                        <field name="url" placeholder="https://nocodb.example.com/api/v2/tables/table-id/records"/>
+                        <field name="token" password="True"/>
+                        <field name="view_id"/>
+                        <field name="date_field"/>
+                        <field name="pos_config_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="offset"/>
+                        <field name="limit"/>
+                        <field name="active" invisible="1"/>
+                        <field name="last_data_sync"/>
+                        <field name="last_count"/>
+                        <field name="webhook_url" widget="CopyClipboardChar"/>
+                        <field name="webhook_token" password="True"/>
+                    </group>
+                    </group>
+                    <group string="Last error" invisible="not last_error">
+                        <field name="last_error" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- ACTION -->
+    <!-- ========================================================= -->
+    <record id="action_external_api_sync" model="ir.actions.act_window">
+        <field name="name">n8n Connection</field>
+        <field name="res_model">external.api.sync</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- MENU ITEMS -->
+    <!-- ========================================================= -->
+
+    <menuitem id="menu_external_api_sync"
+              name="n8n Connection"
+              parent="point_of_sale.menu_point_rep"
+              action="action_external_api_sync"
+              sequence="10"/>
+
+</odoo>

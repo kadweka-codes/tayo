@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dept_kitchen" model="hr.department">
+            <field name="name">Kitchen</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="dept_floor" model="hr.department">
+            <field name="name">Floor</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="job_cook" model="hr.job">
+            <field name="name">Cook</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_kitchen"/>
+        </record>
+        <record id="job_waiter" model="hr.job">
+            <field name="name">Waiter</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_floor"/>
+        </record>
+        <record id="job_cashier" model="hr.job">
+            <field name="name">Cashier</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_floor"/>
+        </record>
+        <record id="job_manager" model="hr.job">
+            <field name="name">Restaurant Manager</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_floor"/>
+        </record>
+
+        <record id="employee_hassan" model="hr.employee">
+            <field name="name">Hassan Abdi</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_kitchen"/>
+            <field name="job_id" ref="job_cook"/>
+            <field name="employee_restaurant_role">cook</field>
+            <field name="work_email">hassan.abdi@example.com</field>
+            <field name="mobile_phone">254700000101</field>
+        </record>
+        <record id="employee_mercy" model="hr.employee">
+            <field name="name">Mercy Wanjiku</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_kitchen"/>
+            <field name="job_id" ref="job_cook"/>
+            <field name="employee_restaurant_role">cook</field>
+            <field name="work_email">mercy.wanjiku@example.com</field>
+            <field name="mobile_phone">254700000102</field>
+        </record>
+        <record id="employee_brian" model="hr.employee">
+            <field name="name">Brian Kipchoge</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_floor"/>
+            <field name="job_id" ref="job_waiter"/>
+            <field name="employee_restaurant_role">waiter</field>
+            <field name="work_email">brian.kipchoge@example.com</field>
+            <field name="mobile_phone">254700000103</field>
+        </record>
+        <record id="employee_aisha" model="hr.employee">
+            <field name="name">Aisha Mohamed</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_floor"/>
+            <field name="job_id" ref="job_waiter"/>
+            <field name="employee_restaurant_role">waiter</field>
+            <field name="work_email">aisha.mohamed@example.com</field>
+            <field name="mobile_phone">254700000104</field>
+        </record>
+        <record id="employee_peter" model="hr.employee">
+            <field name="name">Peter Kamau</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_floor"/>
+            <field name="job_id" ref="job_cashier"/>
+            <field name="employee_restaurant_role">waiter</field>
+            <field name="work_email">peter.kamau@example.com</field>
+            <field name="mobile_phone">254700000105</field>
+        </record>
+        <record id="employee_grace" model="hr.employee">
+            <field name="name">Grace Achieng</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="department_id" ref="dept_floor"/>
+            <field name="job_id" ref="job_manager"/>
+            <field name="employee_restaurant_role">manager</field>
+            <field name="work_email">grace.achieng@example.com</field>
+            <field name="mobile_phone">254700000106</field>
+        </record>
+    </data>
+</odoo>

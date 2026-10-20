@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_kcb_buni_root" name="KCB Buni" sequence="40" groups="base.group_system"/>
+    <menuitem id="menu_kcb_buni_generate" name="Generate Test Payment Link" parent="menu_kcb_buni_root" action="action_kcb_buni_link_wizard" sequence="5"/>
+    <menuitem id="menu_kcb_buni_invoices" name="Test Invoices" parent="menu_kcb_buni_root" action="action_kcb_buni_invoice" sequence="10"/>
+    <menuitem id="menu_kcb_buni_setup" name="Payment Methods" parent="menu_kcb_buni_root" action="action_kcb_buni_config" sequence="20"/>
+</odoo>

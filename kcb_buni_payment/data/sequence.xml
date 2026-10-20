@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_kcb_buni_invoice" model="ir.sequence">
+            <field name="name">KCB Buni invoice reference</field>
+            <field name="code">kcb.buni.invoice</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

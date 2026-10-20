@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="pos_restaurant.view_restaurant_table_form" model="ir.ui.view">
+            <field name="name">Restaurant Table</field>
+            <field name="model">restaurant.table</field>
+            <field name="arch" type="xml">
+                <form string="Restaurant Table">
+                    <sheet>
+                         <div class="oe_title">
+                            <label for="sequence" />
+                            <h1>
+                                <field name="sequence" readonly="1" />
+                            </h1>
+                        </div>
+                        <group>
+                             <group col="2">
+                        <field name="name" required="1"/>
+                        <field name="seats" required="1"/>
+                                 <field name="shape" />
+                                 <field name="color" />
+                                                     <field name="floor_id"/>
+                    </group>
+                            <group>
+
+
+                        <field name="position_h" />
+                        <field name="position_v" />
+                        <field name="width" />
+                        <field name="height" />
+                    </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+     <record id="table_management_custom" model="ir.ui.view">
+          <field name="name">Restaurant Table</field>
+            <field name="model">restaurant.table</field>
+            <field name="arch" type="xml">
+                <list string="Tables Management">
+                    <field name="sequence" />
+                    <field name="name" />
+                    <field name="seats" />
+                    <field name="shape" />
+                    <field name="floor_id"/>
+                    <field name="color" />
+                </list>
+            </field>
+        </record>
+</odoo>

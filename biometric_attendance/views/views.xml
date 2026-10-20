@@ -1,0 +1,109 @@
+<odoo>
+    <data>
+        <record id="view_attendance_form" model="ir.ui.view">
+            <field name="name">attendance.form</field>
+            <field name="model">attendance.attendance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="fetch_data" type="object" string="UPDATE BIOMETIC ATTENDANCE" class="btn-primary" icon="fa-cloud-download" groups="biometric_attendance.group_attendance_executioner"/>
+                    <button name="fetch_employee_data" type="object" string="UPDATE EMPLOYEE BIO-DATA" class="btn-primary" icon="fa-cloud-download" groups="biometric_attendance.group_attendance_executioner"/>
+                        <button name="process_attendance_logs" type="object" string="PROCES ATTENDANCE" class="btn-primary" icon="fa-sync" groups="biometric_attendance.group_attendance_executioner"/>
+                    </header>
+                    <sheet>
+                         <group>
+                            <group>
+                                <field name="ip_address" readonly="confirmed"/>
+                                <field name="port" readonly="confirmed"/>
+                                <field name="username" readonly="confirmed"/>
+                                <field name="active" invisible="1"/>
+                                <field name="last_pull_status" readonly="1"/>
+                                <field name="last_pull_message" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="password" readonly="confirmed"/>
+                                <field name="last_update_time" readonly="confirmed"/>
+                                <field name="confirmed" invisible="1"/>
+                                <field name="page"/>
+                                <field name="limit"/>
+                                <field name="last_sync_attempt" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" />
+                        <field name="activity_ids" />
+                        <field name="message_ids" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_attendance_reporting" model="ir.ui.view">
+            <field name="name">attendance.tree</field>
+            <field name="model">attendance.attendance</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="ip_address" />
+                    <field name="active" invisible="1"/>
+                    <field name="port" />
+                    <field name="username" />
+                    <field name="password" password="1"/>
+                    <field name="last_update_time" />
+                </list>
+            </field>
+        </record>
+
+        <record id="action_attendance_setup" model="ir.actions.act_window">
+            <field name="name">Biometric Attendances</field>
+            <field name="res_model">attendance.attendance</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="working_view_attendance_form" model="ir.ui.view">
+            <field name="name">work.attendance.work.form</field>
+            <field name="model">work.attendance.work</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="punch_time" />
+                            <field name="punch_state" />
+                            <field name="punch_state_display" />
+                            <field name="verify_type"/>
+                            <field name="verify_type_display"/>
+                            <field name="upload_time"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" />
+                        <field name="activity_ids" />
+                        <field name="message_ids" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="working_view_attendance_reporting" model="ir.ui.view">
+            <field name="name">work.attendance.work.tree</field>
+            <field name="model">work.attendance.work</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="employee_id" />
+                    <field name="punch_time" />
+                    <field name="punch_state" />
+                    <field name="punch_state_display" />
+                    <field name="verify_type_display"/>
+                    <field name="terminal_alias"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_attendance_report" model="ir.actions.act_window">
+            <field name="name">work.attendance.work.action</field>
+            <field name="res_model">work.attendance.work</field>
+            <field name="view_mode">list,form</field>
+        </record>
+  </data>
+</odoo>

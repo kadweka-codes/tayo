@@ -7,13 +7,26 @@ POS orders. WhatsApp messages are sent by the WhatsApp Communication module.
 """,
     'summary': 'Order assignment, IoT people counting, and n8n payment matching',
     'category': 'Point Of Sale',
-    'version': '19.0.1.3.0',
+    'version': '19.0.1.4.0',
     'author': 'Odutech Solutions',
     'company': 'Odutech Solutions',
     'maintainer': 'Odutech Solutions',
     'website': "https://www.odutechsolutions.com",
-    'depends': ['point_of_sale', 'pos_restaurant', 'whatsapp_integration', 'hr', 'hr_attendance', 'mail'],
+    'depends': [
+        'point_of_sale',
+        'pos_restaurant',
+        'pos_enterprise',
+        'pos_restaurant_preparation_display',
+        'whatsapp_integration',
+        'hr',
+        'hr_attendance',
+        'mail',
+    ],
     'assets': {
+        'pos_preparation_display.assets': [
+            'odutech_pos/static/src/js/preparation_display.js',
+            'odutech_pos/static/src/xml/preparation_display.xml',
+        ],
         'point_of_sale._assets_pos': [
             'odutech_pos/static/src/css/style.css',
             'odutech_pos/static/src/js/odutech_order_receipt.js',
@@ -26,6 +39,7 @@ POS orders. WhatsApp messages are sent by the WhatsApp Communication module.
     'data': [
         'security/security.xml',
         'views/pos_order.xml',
+        'views/preparation_display_views.xml',
         'views/n8n_view.xml',
         'views/pos_order_extend.xml',
         'views/extend_config.xml',

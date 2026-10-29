@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="preparation_display_stage_owner_form" model="ir.ui.view">
+        <field name="name">pos.preparation.display.stage.owner</field>
+        <field name="model">pos.prep.display</field>
+        <field name="inherit_id" ref="pos_enterprise.preparation_display_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='stages']//field[@name='alert_timer']" position="after">
+                <field name="owner_role"/>
+                <field name="send_whatsapp"/>
+                <field name="whatsapp_template_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

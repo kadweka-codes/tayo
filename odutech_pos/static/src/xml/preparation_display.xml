@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="odutech_pos.PreparationDisplayViewer" t-inherit="pos_enterprise.PrepDisplay" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('top-buttons')]" position="before">
+            <div class="d-flex align-items-center h-100 px-3 border-start border-bottom text-truncate" t-if="this.prepDisplay.viewer">
+                <i class="fa fa-user-circle-o me-2" aria-hidden="true"/>
+                <span class="fw-bold text-truncate" t-esc="this.prepDisplay.viewer.employee_name"/>
+                <span class="text-muted fw-normal ms-2" t-if="this.prepDisplay.viewer.role === 'cook'">Cook</span>
+                <span class="text-muted fw-normal ms-2" t-if="this.prepDisplay.viewer.role === 'waiter'">Waiter</span>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-name="odutech_pos.OrderAssignment" t-inherit="pos_enterprise.Order" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_pdis_order_card_header_top')]" position="after">
+            <div class="small text-truncate px-2" t-esc="assignmentLabel"/>
+        </xpath>
+    </t>
+</templates>

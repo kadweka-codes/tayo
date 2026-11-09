@@ -6,7 +6,18 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='work_email']" position="after">
+            <xpath expr="//page[@name='work_information']//field[@name='parent_id']" position="after">
+                <field name="performance_pool_id" options="{'no_create':True,'no_open':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_employee_public_performance_pool_form" model="ir.ui.view">
+        <field name="name">hr.employee.public.performance.pool</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr.hr_employee_public_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='work_information']//field[@name='parent_id']" position="after">
                 <field name="performance_pool_id" options="{'no_create':True,'no_open':True}"/>
             </xpath>
         </field>

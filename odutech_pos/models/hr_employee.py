@@ -24,7 +24,7 @@ RESTAURANT_ROLES = [
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
-    employee_restaurant_role = fields.Selection(RESTAURANT_ROLES, tracking=True)
+    employee_restaurant_role = fields.Selection(RESTAURANT_ROLES, string="Employee Restaurant Role", tracking=True)
     premier_wallet_number = fields.Char(string="Premier Wallet number")
     evc_plus_number = fields.Char(string="EVC Plus number")
     e_ahab_number = fields.Char(string="E-AHAB number")

@@ -15,7 +15,18 @@ class Employee(models.Model):
         'hr.department.pool',
         string="Performance Pool",
         tracking=True,
-        groups='hr.group_hr_user,base.group_system',
+    )
+
+
+class EmployeePublic(models.Model):
+    _inherit = 'hr.employee.public'
+
+    performance_pool_id = fields.Many2one(
+        'hr.department.pool',
+        related='employee_id.performance_pool_id',
+        string="Performance Pool",
+        readonly=True,
+        compute_sudo=True,
     )
 
 

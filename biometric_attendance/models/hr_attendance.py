@@ -42,7 +42,13 @@ class ResCompany(models.Model):
 class Employee(models.Model):
     _inherit = 'hr.employee'
 
-    employee_number = fields.Char(string="Employee Number", unique=True, tracking=True, groups='hr.group_hr_user,base.group_system')
+    employee_number = fields.Char(string="Employee Number", unique=True, tracking=True)
+
+
+class EmployeePublic(models.Model):
+    _inherit = 'hr.employee.public'
+
+    employee_number = fields.Char(related='employee_id.employee_number', readonly=True, compute_sudo=True)
     warning_ids= fields.One2many("hr.employee.warning","employee_id",string="Warning Type")
 
 

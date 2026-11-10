@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_config_view_form_manufacture" model="ir.ui.view">
+        <field name="name">pos.config.form.manufacture.bom</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <field name="manufacture_bom_products"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_pos_pos_form_manufacture" model="ir.ui.view">
+        <field name="name">pos.order.form.manufacture</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_manufacturing_orders"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-wrench"
+                        invisible="manufacturing_order_count == 0">
+                    <field name="manufacturing_order_count" widget="statinfo" string="Manufacturing"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='lines']/list/field[@name='qty']" position="after">
+                <field name="manufacturing_order_id" optional="show" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

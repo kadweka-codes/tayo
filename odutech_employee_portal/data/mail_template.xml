@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mail_template_portal_credentials" model="mail.template">
+            <field name="name">Employee: Portal Credentials</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="subject">Set your portal password for {{ object.company_id.name }}</field>
+            <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="email_to">{{ object.work_email or '' }}</field>
+            <field name="partner_to" eval="False"/>
+            <field name="use_default_to" eval="False"/>
+            <field name="description">Sent when HR clicks Send Portal Credentials on an employee</field>
+            <field name="email_layout_xmlid">mail.mail_notification_layout</field>
+            <field name="body_html" type="html"><t>
+<p>Hello <t t-out="object.name or ''">Employee</t>,</p>
+<p>
+    <t t-out="object.company_id.name or ''">Your company</t>
+    invited you to the employee portal. Use the button below to choose your password.
+    This link expires in 48 hours.
+</p>
+<div style="margin: 16px 0px 16px 0px;">
+    <a t-att-href="object._get_portal_set_password_url()"
+       style="background-color: #714B67; padding: 8px 16px; text-decoration: none; color: #FFFFFF; border-radius: 5px; font-size: 13px;">
+        Set your password
+    </a>
+</div>
+<p style="font-size: 13px; color: #6c757d;">
+    If the button does not open, copy this link into your browser:<br/>
+    <t t-out="object._get_portal_set_password_url()"/>
+</p>
+<p>If you did not expect this message, you can ignore it.</p>
+            </t></field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

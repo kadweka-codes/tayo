@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_set_password_form" name="Set Portal Password">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta name="robots" content="noindex, nofollow"/>
+                <title>Set your password</title>
+                <style>
+                    body {
+                        margin: 0;
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #f4f6f8;
+                        font-family: "Segoe UI", Arial, sans-serif;
+                        color: #212529;
+                    }
+                    .card {
+                        width: 100%;
+                        max-width: 420px;
+                        margin: 24px;
+                        background: #fff;
+                        border-radius: 12px;
+                        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                        padding: 32px 28px;
+                    }
+                    h1 { font-size: 22px; margin: 0 0 8px; }
+                    p { color: #495057; line-height: 1.5; }
+                    label { display: block; font-size: 14px; margin-bottom: 6px; }
+                    input[type="password"] {
+                        width: 100%;
+                        box-sizing: border-box;
+                        padding: 10px 12px;
+                        border: 1px solid #ced4da;
+                        border-radius: 6px;
+                        font-size: 15px;
+                        margin-bottom: 16px;
+                    }
+                    button {
+                        width: 100%;
+                        background: #714B67;
+                        color: #fff;
+                        border: 0;
+                        border-radius: 6px;
+                        padding: 12px 16px;
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                    .error {
+                        background: #fff3cd;
+                        border-left: 4px solid #fcc419;
+                        padding: 10px 12px;
+                        border-radius: 4px;
+                        margin-bottom: 16px;
+                    }
+                    .company { color: #6c757d; font-size: 14px; margin-bottom: 20px; }
+                </style>
+            </head>
+            <body>
+                <div class="card">
+                    <h1>Set your password</h1>
+                    <t t-if="invalid">
+                        <p>This password link is invalid or has already been used. Ask your company to send a new one.</p>
+                    </t>
+                    <t t-elif="expired">
+                        <p>This password link has expired. Ask your company to send a new one.</p>
+                    </t>
+                    <t t-else="">
+                        <p class="company" t-if="company_name">
+                            <t t-out="company_name"/>
+                        </p>
+                        <p t-if="employee_name">
+                            Hello <t t-out="employee_name"/>. Choose a password for the portal.
+                        </p>
+                        <div class="error" t-if="error">
+                            <t t-out="error"/>
+                        </div>
+                        <form t-attf-action="/odutech/portal/set-password/{{ token }}" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <label for="password">Password</label>
+                            <input id="password" type="password" name="password" required="required" minlength="8" autocomplete="new-password"/>
+                            <label for="password_confirm">Confirm password</label>
+                            <input id="password_confirm" type="password" name="password_confirm" required="required" minlength="8" autocomplete="new-password"/>
+                            <button type="submit">Save password</button>
+                        </form>
+                    </t>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <template id="portal_set_password_done" name="Portal Password Saved">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta name="robots" content="noindex, nofollow"/>
+                <title>Password saved</title>
+                <style>
+                    body {
+                        margin: 0;
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #f4f6f8;
+                        font-family: "Segoe UI", Arial, sans-serif;
+                        color: #212529;
+                    }
+                    .card {
+                        width: 100%;
+                        max-width: 420px;
+                        margin: 24px;
+                        background: #fff;
+                        border-radius: 12px;
+                        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                        padding: 32px 28px;
+                    }
+                    h1 { font-size: 22px; margin: 0 0 8px; }
+                    p { color: #495057; line-height: 1.5; }
+                    a { color: #714B67; }
+                </style>
+            </head>
+            <body>
+                <div class="card">
+                    <h1>Password saved</h1>
+                    <p t-if="employee_name">
+                        Hello <t t-out="employee_name"/>. Your portal password is saved.
+                    </p>
+                    <p t-else="">Your portal password is saved.</p>
+                    <p t-if="portal_url">
+                        You can continue on the portal:
+                        <a t-att-href="portal_url"><t t-out="portal_url"/></a>
+                    </p>
+                </div>
+            </body>
+        </html>
+    </template>
+</odoo>

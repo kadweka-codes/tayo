@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <delete model="ir.ui.view" id="view_company_form_portal"/>
+
+    <record id="view_odutech_portal_company_list" model="ir.ui.view">
+        <field name="name">odutech.portal.company.list</field>
+        <field name="model">odutech.portal.company</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="company_name"/>
+                <field name="login_code"/>
+                <field name="email"/>
+                <field name="country_id"/>
+                <field name="city"/>
+                <field name="billing_period"/>
+                <field name="amount_payable"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_odutech_portal_company_form" model="ir.ui.view">
+        <field name="name">odutech.portal.company.form</field>
+        <field name="model">odutech.portal.company</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="authorize_enterprise_suite"
+                            type="object"
+                            string="Connect to Portal"
+                            class="btn-primary"
+                            invisible="status == 'connected'"/>
+                    <button name="action_configure_custom_domain"
+                            type="object"
+                            string="Add custom domain"
+                            invisible="status != 'connected' or dns_verified"/>
+                    <field name="dns_verified" invisible="status != 'connected'" readonly="1"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,connected,expired"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="company_id" readonly="status != 'draft'"/>
+                            <field name="company_name" readonly="1" force_save="1"/>
+                            <field name="email" readonly="1" force_save="1"/>
+                            <field name="mobile" readonly="1" force_save="1"/>
+                            <field name="theme" readonly="1" force_save="1"/>
+                            <field name="country_id" readonly="1" force_save="1"/>
+                            <field name="city" readonly="1" force_save="1"/>
+                        </group>
+                        <group>
+                            <field name="odoo_erp_link" widget="url" readonly="1" force_save="1"/>
+                            <field name="odoo_version" readonly="1" force_save="1"/>
+                            <field name="employee_count" readonly="1" force_save="1"/>
+                            <field name="billing_period" readonly="1" force_save="1"/>
+                            <field name="amount_payable" readonly="status != 'draft'"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="allow_employee_portal" readonly="1" force_save="1"/>
+                            <field name="employee_portal_url" widget="url" readonly="1" force_save="1"/>
+                            <field name="auto_create_bill" readonly="status != 'draft'"/>
+                        </group>
+                    </group>
+                    <group string="Portal credentials">
+                        <group>
+                            <field name="client_key" readonly="status != 'draft'"/>
+                            <field name="client_secret" password="True" readonly="status != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="subscription_type" readonly="1"/>
+                            <field name="portal_subscription_code"/>
+                            <field name="authorization_token" password="True"/>
+                            <field name="subscription_expiry"/>
+                            <field name="login_code" string="Login Portal Code"/>
+                            <field name="has_custom_domain"/>
+                            <field name="custom_domain" readonly="1" invisible="status != 'connected'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="DNS records" name="dns_records" invisible="status != 'connected'">
+                            <field name="domain_check_message" readonly="1" invisible="not domain_check_message"/>
+                            <button name="action_validate_custom_domain"
+                                    type="object"
+                                    string="Validate"
+                                    class="btn-primary"
+                                    invisible="dns_verified or not custom_domain"/>
+                            <field name="domain_record_ids" readonly="1">
+                                <list create="false" edit="false" delete="false">
+                                    <field name="record_type"/>
+                                    <field name="host"/>
+                                    <field name="dns_name"/>
+                                    <field name="value"/>
+                                    <field name="verified"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Invoices" name="invoices">
+                            <field name="invoice_ids" readonly="status != 'draft'">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="invoice_date"/>
+                                    <field name="billing_period"/>
+                                    <field name="amount"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="state"/>
+                                    <field name="auto_created" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_odutech_portal_company" model="ir.actions.act_window">
+        <field name="name">Company Setup</field>
+        <field name="res_model">odutech.portal.company</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_odutech_portal_invoice_list" model="ir.ui.view">
+        <field name="name">odutech.portal.invoice.list</field>
+        <field name="model">odutech.portal.invoice</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="invoice_date"/>
+                <field name="billing_period"/>
+                <field name="amount"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_odutech_portal_invoice_form" model="ir.ui.view">
+        <field name="name">odutech.portal.invoice.form</field>
+        <field name="model">odutech.portal.invoice</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="setup_id"/>
+                            <field name="company_id"/>
+                            <field name="invoice_date"/>
+                        </group>
+                        <group>
+                            <field name="billing_period"/>
+                            <field name="amount"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="state"/>
+                            <field name="auto_created"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_odutech_portal_invoice" model="ir.actions.act_window">
+        <field name="name">Invoices</field>
+        <field name="res_model">odutech.portal.invoice</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_odutech_portal_root"
+              name="EP.Portal"
+              sequence="50"
+              groups="base.group_system"
+              web_icon="odutech_employee_portal,static/description/icon.png"/>
+    <menuitem id="menu_odutech_portal_company"
+              name="Company Setup"
+              parent="menu_odutech_portal_root"
+              action="action_odutech_portal_company"
+              sequence="10"/>
+    <menuitem id="menu_odutech_portal_invoice"
+              name="Invoices"
+              parent="menu_odutech_portal_root"
+              action="action_odutech_portal_invoice"
+              sequence="20"/>
+</odoo>

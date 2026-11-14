@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_domain_wizard_form" model="ir.ui.view">
+        <field name="name">odutech.employee.domain.wizard.form</field>
+        <field name="model">odutech.employee.domain.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Configure custom domain">
+                <group>
+                    <field name="employee_id" invisible="1"/>
+                    <field name="setup_id" invisible="1"/>
+                    <field name="dns_verified" invisible="1"/>
+                    <field name="has_dns_records" invisible="1"/>
+                    <field name="custom_domain" placeholder="portal.example.com" readonly="dns_verified"/>
+                    <field name="domain_check_message" readonly="1" invisible="not setup_id or not domain_check_message"/>
+                </group>
+                <separator string="Do not have a custom domain?"/>
+                <div class="px-3 pb-2">
+                    Do not have a custom domain? Buy one
+                    <a href="https://odoogrid.com/#servers" target="_blank" rel="noopener noreferrer">here</a>.
+                </div>
+                <field name="line_ids" readonly="1" invisible="not setup_id">
+                    <list create="false" edit="false" delete="false">
+                        <field name="record_type"/>
+                        <field name="host"/>
+                        <field name="dns_name"/>
+                        <field name="value"/>
+                        <field name="verified"/>
+                    </list>
+                </field>
+                <footer>
+                    <button name="action_fetch_dns" type="object" string="Save" class="btn-primary" invisible="dns_verified"/>
+                    <button name="action_validate_dns" type="object" string="Validate" class="btn-primary" invisible="dns_verified or not has_dns_records"/>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

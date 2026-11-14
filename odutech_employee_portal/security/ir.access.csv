@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_odutech_employee_domain_wizard,odutech.employee.domain.wizard,odutech.employee.domain.wizard,hr.group_hr_user,crud,
+access_odutech_employee_domain_wizard_system,odutech.employee.domain.wizard.system,odutech.employee.domain.wizard,base.group_system,crud,
+access_odutech_portal_company,odutech.portal.company,odutech.portal.company,base.group_system,crud,
+access_odutech_portal_invoice,odutech.portal.invoice,odutech.portal.invoice,base.group_system,crud,
+access_odutech_portal_domain_record,odutech.portal.domain.record,odutech.portal.domain.record,base.group_system,crud,
+access_odutech_employee_domain_wizard_line,odutech.employee.domain.wizard.line,odutech.employee.domain.wizard.line,hr.group_hr_user,crud,
+access_odutech_employee_domain_wizard_line_system,odutech.employee.domain.wizard.line.system,odutech.employee.domain.wizard.line,base.group_system,crud,

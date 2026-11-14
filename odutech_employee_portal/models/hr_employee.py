@@ -475,19 +475,26 @@ class HrEmployee(models.Model):
     @api.model
     def _portal_from_access_token(self, token):
         """Return (employee, error_code). error_code is None when the token is valid."""
+        token = (token or '').strip()
         if not token:
             return self.browse(), 'missing'
-        employee = self.sudo().search([
-            ('portal_access_token', '=', token),
-            ('portal_user', '=', True),
-            ('active', '=', True),
-        ], limit=1)
-        if not employee:
+        self.env.cr.execute(
+            """
+            SELECT id, portal_access_token_expiration
+              FROM hr_employee
+             WHERE portal_access_token = %s
+               AND portal_user IS TRUE
+               AND active IS TRUE
+             LIMIT 1
+            """,
+            [token],
+        )
+        row = self.env.cr.fetchone()
+        if not row:
             return self.browse(), 'invalid'
-        if (
-            not employee.portal_access_token_expiration
-            or employee.portal_access_token_expiration < fields.Datetime.now()
-        ):
+        employee = self.sudo().browse(row[0])
+        expires = row[1]
+        if not expires or expires < fields.Datetime.now():
             employee._portal_revoke_access_token()
             return self.browse(), 'expired'
         return employee, None

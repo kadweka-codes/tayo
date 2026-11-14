@@ -53,6 +53,9 @@ def api_documentation():
 }""",
                 'response': """{
   "status": "success",
+  "access_token": "…",
+  "token_type": "Bearer",
+  "expires_at": "2026-11-15 03:46:00",
   "data": {
     "access_token": "…",
     "token_type": "Bearer",
@@ -61,6 +64,7 @@ def api_documentation():
   }
 }""",
                 'notes': (
+                    'Send access_token on later calls as Authorization: Bearer <access_token>. '
                     'Unknown email or password returns 401 and "Invalid email or password." '
                     'A past subscription expiry returns "Subscription has expired." '
                     'More active employees than Employee Count returns "License employee limit is reached."'
@@ -187,6 +191,208 @@ def api_documentation():
                     'profile_picture accepts a base64 string, a data:image URL, or a multipart file of the same name. '
                     'PNG, JPEG, GIF, or WebP, up to %s MB. null or an empty string clears the picture.'
                 ) % (EDITABLE_FIELDS, PICTURE_MAX_MB),
+            },
+            {
+                'method': 'GET',
+                'path': '/odutech/portal/api/leave-types',
+                'auth': 'bearer token',
+                'summary': 'Leave types for the signed-in employee’s company, including types shared by every company.',
+                'request': 'Authorization: Bearer <token>',
+                'response': """{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "name": "Paid Time Off",
+      "requires_allocation": true,
+      "request_unit": "day",
+      "unpaid": false,
+      "active": true,
+      "employee_requests": false,
+      "support_document": false,
+      "leave_validation_type": "hr",
+      "allocation_validation_type": "hr",
+      "company_id": 1,
+      "company": "Odutech Solutions"
+    }
+  ]
+}""",
+            },
+            {
+                'method': 'GET',
+                'path': '/odutech/portal/api/leave-types/<id>',
+                'auth': 'bearer token',
+                'summary': 'One leave type.',
+                'request': 'Authorization: Bearer <token>',
+                'response': '{ "status": "success", "data": { "id": 1, "name": "Paid Time Off" } }',
+                'notes': '404 when the type is missing or belongs to another company.',
+            },
+            {
+                'method': 'POST',
+                'path': '/odutech/portal/api/leave-types',
+                'auth': 'bearer token',
+                'summary': 'Create a leave type for the signed-in employee’s company.',
+                'request': """{
+  "name": "Sick Leave",
+  "requires_allocation": true,
+  "request_unit": "day",
+  "unpaid": false,
+  "employee_requests": true,
+  "leave_validation_type": "manager",
+  "allocation_validation_type": "hr"
+}""",
+                'response': '{ "status": "success", "data": { "id": 8, "name": "Sick Leave" } }',
+                'notes': 'request_unit is day, half_day, or hour. Validation types are no_validation, hr, manager, or both. name is required.',
+            },
+            {
+                'method': 'PUT, PATCH',
+                'path': '/odutech/portal/api/leave-types/<id>',
+                'auth': 'bearer token',
+                'summary': 'Update a leave type that belongs to the employee’s company.',
+                'request': '{ "name": "Sick Leave", "unpaid": true }',
+                'response': '{ "status": "success", "data": { "id": 8, "name": "Sick Leave", "unpaid": true } }',
+                'notes': 'Types with no company are shared and cannot be changed.',
+            },
+            {
+                'method': 'DELETE',
+                'path': '/odutech/portal/api/leave-types/<id>',
+                'auth': 'bearer token',
+                'summary': 'Delete a leave type that belongs to the employee’s company.',
+                'request': 'Authorization: Bearer <token>',
+                'response': '{ "status": "success", "message": "Deleted." }',
+                'notes': 'Odoo refuses the delete when the type is already used by a leave or an allocation.',
+            },
+            {
+                'method': 'GET',
+                'path': '/odutech/portal/api/leave-allocations',
+                'auth': 'bearer token',
+                'summary': 'Leave allocations for the signed-in employee, with status.',
+                'request': 'Authorization: Bearer <token>\nOptional query: ?status=confirm',
+                'response': """{
+  "status": "success",
+  "data": [
+    {
+      "id": 4,
+      "name": "Paid Time Off",
+      "leave_type_id": 1,
+      "leave_type": "Paid Time Off",
+      "employee_id": 1,
+      "date_from": "2026-01-01",
+      "date_to": "2026-12-31",
+      "number_of_days": 21,
+      "notes": "",
+      "state": "validate",
+      "status": "Approved"
+    }
+  ]
+}""",
+                'notes': 'status filter values: confirm (To Approve), refuse (Refused), validate1 (Second Approval), validate (Approved).',
+            },
+            {
+                'method': 'GET',
+                'path': '/odutech/portal/api/leave-allocations/<id>',
+                'auth': 'bearer token',
+                'summary': 'One of the signed-in employee’s allocations.',
+                'request': 'Authorization: Bearer <token>',
+                'response': '{ "status": "success", "data": { "id": 4, "state": "validate", "status": "Approved" } }',
+            },
+            {
+                'method': 'POST',
+                'path': '/odutech/portal/api/leave-allocations',
+                'auth': 'bearer token',
+                'summary': 'Request an allocation for the signed-in employee. Status starts as To Approve.',
+                'request': """{
+  "leave_type_id": 1,
+  "date_from": "2026-01-01",
+  "date_to": "2026-12-31",
+  "number_of_days": 5,
+  "notes": "Extra days"
+}""",
+                'response': '{ "status": "success", "data": { "id": 9, "state": "confirm", "status": "To Approve" } }',
+                'notes': 'leave_type_id is required. date_from defaults to today. number_of_days defaults to 1.',
+            },
+            {
+                'method': 'PUT, PATCH',
+                'path': '/odutech/portal/api/leave-allocations/<id>',
+                'auth': 'bearer token',
+                'summary': 'Update an allocation that is still To Approve.',
+                'request': '{ "number_of_days": 6, "notes": "Updated" }',
+                'response': '{ "status": "success", "data": { "id": 9, "number_of_days": 6, "state": "confirm", "status": "To Approve" } }',
+            },
+            {
+                'method': 'DELETE',
+                'path': '/odutech/portal/api/leave-allocations/<id>',
+                'auth': 'bearer token',
+                'summary': 'Delete one of the signed-in employee’s allocations.',
+                'request': 'Authorization: Bearer <token>',
+                'response': '{ "status": "success", "message": "Deleted." }',
+                'notes': 'Approved allocations, and allocations that already have validated leave, cannot be deleted.',
+            },
+            {
+                'method': 'GET',
+                'path': '/odutech/portal/api/leaves',
+                'auth': 'bearer token',
+                'summary': 'Leave applied by the signed-in employee, with status.',
+                'request': 'Authorization: Bearer <token>\nOptional query: ?status=confirm',
+                'response': """{
+  "status": "success",
+  "data": [
+    {
+      "id": 12,
+      "name": "Family visit",
+      "leave_type_id": 1,
+      "leave_type": "Paid Time Off",
+      "employee_id": 1,
+      "request_date_from": "2026-12-01",
+      "request_date_to": "2026-12-03",
+      "number_of_days": 3,
+      "notes": "",
+      "state": "confirm",
+      "status": "To Approve"
+    }
+  ]
+}""",
+                'notes': 'status filter values: confirm (To Approve), refuse (Refused), validate1 (Second Approval), validate (Approved), cancel (Cancelled).',
+            },
+            {
+                'method': 'GET',
+                'path': '/odutech/portal/api/leaves/<id>',
+                'auth': 'bearer token',
+                'summary': 'One leave request and its status.',
+                'request': 'Authorization: Bearer <token>',
+                'response': '{ "status": "success", "data": { "id": 12, "state": "confirm", "status": "To Approve" } }',
+            },
+            {
+                'method': 'POST',
+                'path': '/odutech/portal/api/leaves',
+                'auth': 'bearer token',
+                'summary': 'Apply for leave. Status starts as To Approve.',
+                'request': """{
+  "leave_type_id": 1,
+  "request_date_from": "2026-12-01",
+  "request_date_to": "2026-12-03",
+  "name": "Family visit",
+  "notes": ""
+}""",
+                'response': '{ "status": "success", "data": { "id": 12, "state": "confirm", "status": "To Approve" } }',
+                'notes': 'leave_type_id, request_date_from, and request_date_to are required. Dates are YYYY-MM-DD.',
+            },
+            {
+                'method': 'PUT, PATCH',
+                'path': '/odutech/portal/api/leaves/<id>',
+                'auth': 'bearer token',
+                'summary': 'Update a leave request that is still To Approve.',
+                'request': '{ "request_date_to": "2026-12-04", "notes": "One extra day" }',
+                'response': '{ "status": "success", "data": { "id": 12, "state": "confirm", "status": "To Approve" } }',
+            },
+            {
+                'method': 'DELETE',
+                'path': '/odutech/portal/api/leaves/<id>',
+                'auth': 'bearer token',
+                'summary': 'Delete a leave request that is To Approve, Second Approval, or Cancelled, and is not in the past.',
+                'request': 'Authorization: Bearer <token>',
+                'response': '{ "status": "success", "message": "Deleted." }',
+                'notes': 'Approved or refused leave is not deleted here.',
             },
         ],
     }
@@ -349,7 +555,7 @@ def _render_html(document):
                 pretty = JSON.stringify(parsed, null, 2);
               } catch (error) {}
               result.textContent = response.status + ' ' + response.statusText + '\\n\\n' + pretty;
-              const token = parsed && parsed.data && parsed.data.access_token;
+              const token = parsed && (parsed.access_token || (parsed.data && parsed.data.access_token));
               if (token) {
                 tokenInput.value = token;
                 localStorage.setItem('epPortalToken', token);

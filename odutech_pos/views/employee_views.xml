@@ -8,19 +8,6 @@
             <xpath expr="//page[@name='work_information']//field[@name='parent_id']" position="after">
                 <field name="employee_restaurant_role"/>
             </xpath>
-            <xpath expr="//notebook" position="inside">
-                <page string="Mobile Money">
-                    <group>
-                        <field name="premier_wallet_number"/>
-                        <field name="evc_plus_number"/>
-                        <field name="e_ahab_number"/>
-                        <field name="my_cash_number"/>
-                        <field name="t_plus_number"/>
-                        <field name="e_besa"/>
-                        <field name="my_bank"/>
-                    </group>
-                </page>
-            </xpath>
         </field>
     </record>
 

@@ -26,45 +26,6 @@
 
                     <br/>
 
-                    <div class="premier_wallet_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
-                        P-Wallet: <t t-if="order.premier_wallet_number">
-                            <t t-esc="order.premier_wallet_number" />
-                        </t>
-                    </div>
-                    <div class="evc_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin: 0;">
-                        M-Account: <t t-if="order.evc_plus_number">
-                            <t t-esc="order.evc_plus_number" />
-                        </t>
-                    </div>
-                    <div class="e_ahab_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin: 0;">
-                        E-Dahab: <t t-if="order.e_ahab_number">
-                            <t t-esc="order.e_ahab_number" />
-                        </t>
-                    </div>
-                    <div class="my_cash_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
-                        My-Cash: <t t-if="order.my_cash_number">
-                            <t t-esc="order.my_cash_number" />
-                        </t>
-                    </div>
-                    <div class="t_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
-                        T-Plus: <t t-if="order.t_plus_number">
-                            <t t-esc="order.t_plus_number" />
-                        </t>
-                    </div>
-                    <div class="t_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
-                        My Bank: <t t-if="order.my_bank">
-                            <t t-esc="order.my_bank" />
-                        </t>
-                    </div>
-                    <div class="t_plus_number" style="text-align:center;font-size: 13px;font-family:Merchant;margin:0;">
-                        E-Besa: <t t-if="order.e_besa">
-                            <t t-esc="order.e_besa" />
-                        </t>
-                    </div>
-
-                    <br/>
-
-
                     <div t-if="order.config.receipt_header" style="white-space:pre-line" t-esc="order.config.receipt_header" />
 
                     <div class="pos-receipt-order-data">

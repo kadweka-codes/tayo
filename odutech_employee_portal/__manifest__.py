@@ -1,6 +1,6 @@
 {
     'name': 'EP.Portal',
-    'version': '20.0.2.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': 'Employee portal and company portal setup',
     'description': """
@@ -16,7 +16,7 @@
         'mail',
     ],
     'data': [
-        'security/ir.access.csv',
+        'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
         'data/mail_template.xml',
         'views/portal_company_views.xml',

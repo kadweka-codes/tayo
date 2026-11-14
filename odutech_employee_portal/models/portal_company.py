@@ -125,7 +125,7 @@ class OdutechPortalCompany(models.Model):
             ('company_id', '=', company.id),
             ('active', '=', True),
         ])
-        self.odoo_erp_link = self.env['ir.config_parameter'].sudo().get_str('web.base.url')
+        self.odoo_erp_link = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         self.odoo_version = release.series
 
     def portal_base_url(self):
@@ -276,8 +276,8 @@ class OdutechPortalCompany(models.Model):
                     "xAccount": "odutech",
                     "facebookAccount": "odutech",
                     "githubAccount": "odutech",
-                    "linkedinAccount": es.company_id.social_twitter,
-                    "youtubeAccount": es.company_id.social_youtube,
+                    "linkedinAccount": getattr(es.company_id, 'social_twitter', False),
+                    "youtubeAccount": getattr(es.company_id, 'social_youtube', False),
                     "instagramAccount": "odutech",
                     "tiktokAccount": "odutech",
                     "discordAccount": "254754625698"

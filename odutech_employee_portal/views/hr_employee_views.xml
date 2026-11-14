@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_portal" model="ir.ui.view">
+        <field name="name">hr.employee.form.odutech.portal</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="portal_user" widget="boolean_toggle"/>
+                <button name="action_send_portal_credentials"
+                        type="object"
+                        string="Send Portal Credentials"
+                        invisible="not id"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Portal" name="odutech_portal" >
+                    <group>
+                        <group string="Portal Access">
+                            <field name="password" password="True" readonly="1"/>
+                            <field name="password_reset_token" readonly="1"/>
+                            <field name="token_expiration_time" readonly="1"/>
+                            <field name="portal_access_token" readonly="1"/>
+                            <field name="portal_access_token_expiration" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

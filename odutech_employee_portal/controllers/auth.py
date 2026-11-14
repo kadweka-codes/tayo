@@ -133,12 +133,17 @@ class PortalAuthController(http.Controller):
             return json_response({'status': 'failed', 'message': str(license_message)}, 403)
 
         token, expires = employee._portal_issue_access_token()
+        expires_at = expires.strftime('%Y-%m-%d %H:%M:%S')
+        access = {
+            'access_token': token,
+            'token_type': 'Bearer',
+            'expires_at': expires_at,
+        }
         return json_response({
             'status': 'success',
+            **access,
             'data': {
-                'access_token': token,
-                'token_type': 'Bearer',
-                'expires_at': expires.strftime('%Y-%m-%d %H:%M:%S'),
+                **access,
                 'employee': employee._portal_api_values(),
             },
         })

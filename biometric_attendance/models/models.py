@@ -6,7 +6,7 @@ import requests
 
 from odoo import models, fields, _
 from odoo.exceptions import UserError
-from odoo.osv.expression import OR
+from odoo.fields import Domain
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -103,7 +103,7 @@ class Attendance(models.Model):
                                 domains.append([('registration_number', '=', code)])
                         if email:
                             domains.append([('work_email', '=', email)])
-                        employee = Employee.search(OR(domains), limit=1) if domains else Employee
+                        employee = Employee.search(Domain.OR(domains), limit=1) if domains else Employee
                         if not employee:
                             continue
                         vals = {}

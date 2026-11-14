@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="company_name"/>
-                <field name="login_code"/>
+                <field name="login_code" readonly="True"/>
                 <field name="email"/>
                 <field name="country_id"/>
                 <field name="city"/>
@@ -68,8 +68,8 @@
                             <field name="portal_subscription_code"/>
                             <field name="authorization_token" password="True"/>
                             <field name="subscription_expiry"/>
-                            <field name="login_code" string="Login Portal Code"/>
-                            <field name="has_custom_domain"/>
+                            <field name="login_code" string="Login Portal Code" readonly="True"/>
+                            <field name="has_custom_domain" readonly="True"/>
                             <field name="custom_domain" readonly="1" invisible="status != 'connected'"/>
                         </group>
                     </group>

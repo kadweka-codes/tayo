@@ -79,8 +79,8 @@ class OdutechPortalCompany(models.Model):
         copy=False,
     )
     subscription_expiry = fields.Date(string='Subscription Expiry', readonly=True)
-    login_code = fields.Char(string='Login Portal Code', copy=False)
-    has_custom_domain = fields.Boolean(string='Has Custom Domain')
+    login_code = fields.Char(string='Login Portal Code', readonly=True, copy=False)
+    has_custom_domain = fields.Boolean(string='Has Custom Domain', readonly=True)
     custom_domain = fields.Char(string='Custom Domain', copy=False)
     dns_verified = fields.Boolean(string='DNS Verified', copy=False)
     domain_check_message = fields.Char(string='DNS status', readonly=True, copy=False)
@@ -139,10 +139,16 @@ class OdutechPortalCompany(models.Model):
         if self.status == 'expired' or (self.subscription_expiry and self.subscription_expiry < today):
             return _("Subscription has expired.")
         paid_employees = self.employee_count or 0
-        active_employees = self.env['hr.employee'].sudo().search_count([
-            ('company_id', '=', self.company_id.id),
-            ('active', '=', True),
-        ])
+        self.env.cr.execute(
+            """
+            SELECT count(*)
+              FROM hr_employee
+             WHERE company_id = %s
+               AND active IS TRUE
+            """,
+            [self.company_id.id],
+        )
+        active_employees = self.env.cr.fetchone()[0]
         if active_employees > paid_employees:
             return _("License employee limit is reached.")
         return None
@@ -301,15 +307,17 @@ class OdutechPortalCompany(models.Model):
                 _logger.error(f"Authorization portal api response {response.text}")
 
                 # Extract nested organization data safely
-                org_data = result.get("organization", {})
+                org_data = result.get("organization") or {}
                 _logger.error(f"ORGANIZATION DATA {response.text}")
+                company_code = result.get("companyCode") or org_data.get("companyCode")
 
                 # Write the returned values to the Odoo record fields
-                es.write({
+                es.with_context(odutech_portal_system_write=True).write({
                     "authorization_token": result.get("token"),
                     "subscription_expiry": result.get("expiresAt"),
                     "portal_subscription_code": org_data.get("subscriptionCode"),
                     "status": "connected",
+                    "login_code": company_code or False,
                     "subscription_type": org_data.get("plan"),
                 })
                 return {
@@ -326,11 +334,26 @@ class OdutechPortalCompany(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        if not self.env.context.get('odutech_portal_system_write'):
+            vals_list = [
+                {
+                    key: value
+                    for key, value in vals.items()
+                    if key not in ('login_code', 'has_custom_domain')
+                }
+                for vals in vals_list
+            ]
         records = super().create(vals_list)
         records.filtered('auto_create_bill')._create_payable_invoice()
         return records
 
     def write(self, vals):
+        if not self.env.context.get('odutech_portal_system_write'):
+            vals = {
+                key: value
+                for key, value in vals.items()
+                if key not in ('login_code', 'has_custom_domain')
+            }
         result = super().write(vals)
         if vals.get('auto_create_bill'):
             self.filtered('auto_create_bill')._create_payable_invoice()

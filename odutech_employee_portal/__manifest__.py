@@ -1,6 +1,6 @@
 {
     'name': 'EP.Portal',
-    'version': '19.0.2.0.0',
+    'version': '19.0.2.1.0',
     'category': 'Human Resources',
     'summary': 'Employee portal and company portal setup',
     'description': """
@@ -13,6 +13,7 @@
     'license': 'LGPL-3',
     'depends': [
         'hr',
+        'hr_holidays',
         'mail',
     ],
     'data': [

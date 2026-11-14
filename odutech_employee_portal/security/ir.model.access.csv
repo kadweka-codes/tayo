@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odutech_employee_domain_wizard,odutech.employee.domain.wizard,model_odutech_employee_domain_wizard,hr.group_hr_user,1,1,1,1
+access_odutech_employee_domain_wizard_system,odutech.employee.domain.wizard.system,model_odutech_employee_domain_wizard,base.group_system,1,1,1,1
+access_odutech_portal_company,odutech.portal.company,model_odutech_portal_company,base.group_system,1,1,1,1
+access_odutech_portal_invoice,odutech.portal.invoice,model_odutech_portal_invoice,base.group_system,1,1,1,1
+access_odutech_portal_domain_record,odutech.portal.domain.record,model_odutech_portal_domain_record,base.group_system,1,1,1,1
+access_odutech_employee_domain_wizard_line,odutech.employee.domain.wizard.line,model_odutech_employee_domain_wizard_line,hr.group_hr_user,1,1,1,1
+access_odutech_employee_domain_wizard_line_system,odutech.employee.domain.wizard.line.system,model_odutech_employee_domain_wizard_line,base.group_system,1,1,1,1
